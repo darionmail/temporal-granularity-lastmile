@@ -11,8 +11,8 @@ Pokreni: python3 pripremi_prosinac.py
 import pandas as pd
 import numpy as np
 
-INPUT_FILE = "/podaci/data_fixed/zagreb_deliveries.csv"
-OUTPUT_FILE = "/podaci/data_fixed/zagreb_zapad_prosinac_optimizacija.csv"
+INPUT_FILE = config["data"].get("input_file_raw", "data/raw_deliveries.csv")
+OUTPUT_FILE = config["data"].get("input_file_december", "data/december_input.csv")
 
 FACILITY_NAME = "Zagreb West distribution area"
 TARGET_MONTH = "2025-12"

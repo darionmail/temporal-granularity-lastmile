@@ -23,7 +23,7 @@ from hex_utils import snap_cover_cap, get_neighbor_centers, hex_area
 # Prosinacki config - razlikuje se od listopadskog samo u input/output putanjama
 CONFIG = {
     "data": {
-        "input_file": "/podaci/data_fixed/zagreb_zapad_prosinac_optimizacija.csv",
+        "input_file": config["data"].get("input_file_december", "data/december_input.csv"),
         "results_dir": "results_dir_prosinac",
     },
     "capacity": {"n_min": 60, "n_max": 80},

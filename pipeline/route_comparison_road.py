@@ -26,7 +26,7 @@ warnings.filterwarnings("ignore")
 
 INPUT_FILE = config["data"]["input_file"]
 OUTPUT_FILE = "results_dir/route_comparison.csv"
-GRAPH_CACHE = "os.path.join(os.path.dirname(config["data"]["results_dir"]), "zagreb_zapad_graph.graphml")"
+GRAPH_CACHE = os.path.join(os.path.dirname(config["data"]["results_dir"]), "road_network_graph.graphml")
 
 # ── 1. Ucitaj podatke ──
 print("Ucitavam podatke...")
