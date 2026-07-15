@@ -54,7 +54,7 @@ def stage4_reallocation(day_points_xy, assignment, hexagons, active_couriers):
 def stage5_refinement(day_points_xy, assignment, hexagons, hex_config, refine_config):
     """
     Lokalno pretrazivanje 0.5km resetke radi smanjenja overlapa i penalizacije outsidea.
-    Vraca azurirani hexagons dict.
+    Returns updated hexagons dict.
     """
     hexagons = {cid: dict(h) for cid, h in hexagons.items()}
     alpha = refine_config["alpha"]

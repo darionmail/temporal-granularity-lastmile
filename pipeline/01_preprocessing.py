@@ -1,9 +1,9 @@
 """
 01_preprocessing.py
 
-Ucitava finalni Zagreb-zapad October uzorak, projicira geografske koordinate
-u lokalni metricki sustav (x, y u metrima), i sprema obogaceni dataset
-spreman za sve tri optimizacijske metode.
+Loads the Zagreb West October dataset, projects geographic coordinates
+into a local metric system (x, y in meters), and saves the enriched dataset
+ready for all three optimization methods.
 
 Run: python3 01_preprocessing.py
 """

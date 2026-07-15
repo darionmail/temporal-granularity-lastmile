@@ -141,7 +141,7 @@ try:
     axes[1].legend(fontsize=10)
     axes[1].grid(True, alpha=0.3)
 
-    # Izracunaj stvarni road factor
+    # Compute actual road factor
     road_factor = (common["actual_km_road"] / common["actual_km_hav"]).median()
     axes[1].text(0.05, 0.93, f"Median road factor: {road_factor:.2f}×",
                  transform=axes[1].transAxes, fontsize=11,

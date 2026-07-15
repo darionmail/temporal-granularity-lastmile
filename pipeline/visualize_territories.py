@@ -53,7 +53,7 @@ def plot_method(method_name, assign_file, hex_file, ax):
     day_assign = assign[assign["date"] == representative_day]
     day_hexes = hexes[hexes["date"] == representative_day]
 
-    # Crtaj heksagone
+    # Draw hexagons
     for _, hrow in day_hexes.iterrows():
         cid = hrow["UserID"]
         poly = wkt.loads(hrow["polygon_wkt"])
