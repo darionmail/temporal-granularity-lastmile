@@ -30,7 +30,7 @@ ax.set_xlabel("Route length saving (%)\n(actual − optimal) / actual × 100", f
 ax.set_ylabel("Number of (courier, day) pairs", fontsize=12)
 ax.set_title("Distribution of Route Efficiency Gains\n"
              "Nearest-Neighbor TSP vs. Actual Delivery Sequence\n"
-             "Zagreb West HPE, October 2025 (435 courier-day pairs)", fontsize=13)
+             "Zagreb West distribution area, October 2025 (435 courier-day pairs)", fontsize=13)
 ax.legend(fontsize=11)
 ax.grid(True, alpha=0.3)
 # Annotate negative savings zone
@@ -62,7 +62,7 @@ ax.set_xticklabels([str(c) for c in couriers], rotation=45, fontsize=9)
 ax.set_xlabel("Courier ID", fontsize=12)
 ax.set_ylabel("Route length saving (%)", fontsize=12)
 ax.set_title("Route Efficiency Gain by Courier\n"
-             "Zagreb West HPE, October 2025", fontsize=13)
+             "Zagreb West distribution area, October 2025", fontsize=13)
 ax.legend(fontsize=11)
 ax.grid(True, alpha=0.3, axis="y")
 plt.tight_layout()

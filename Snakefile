@@ -1,4 +1,4 @@
-# Snakefile - Teritorijalna optimizacija dostavnih ruta, Zagreb zapad HPE, listopad 2025
+# Snakefile - Teritorijalna optimizacija dostavnih ruta, Zagreb West distribution area, listopad 2025
 #
 # Pokreni cijeli workflow: snakemake --cores 4
 # Dry run (provjera plana bez izvrsavanja): snakemake -n

@@ -27,7 +27,7 @@ def main():
     df["outside_per_day"] = df["outside"] / df["n_days"]
 
     print("=" * 80)
-    print("FINALNA USPOREDBA METODA - Zagreb zapad HPE, listopad 2025 (SIROVO, 27 dana)")
+    print("FINALNA USPOREDBA METODA - Zagreb West distribution area, listopad 2025 (SIROVO, 27 dana)")
     print("=" * 80)
     print()
 

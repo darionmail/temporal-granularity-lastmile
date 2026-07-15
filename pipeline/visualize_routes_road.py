@@ -34,7 +34,7 @@ ax.set_xlabel("Route length saving (%)\n(actual − optimal) / actual × 100", f
 ax.set_ylabel("Number of (courier, day) pairs", fontsize=12)
 ax.set_title("Distribution of Route Efficiency Gains\n"
              "Nearest-Neighbor TSP vs. Actual Delivery Sequence\n"
-             "Zagreb West HPE, October 2025 — Road Network Distances (OSMnx)", fontsize=13)
+             "Zagreb West distribution area, October 2025 — Road Network Distances (OSMnx)", fontsize=13)
 ax.legend(fontsize=11)
 ax.grid(True, alpha=0.3)
 note = (f"n={len(df)}  |  Mean={df['saving_pct'].mean():.1f}%  |  "
@@ -64,7 +64,7 @@ ax.set_xticklabels([str(c) for c in couriers], rotation=45, fontsize=9)
 ax.set_xlabel("Courier ID", fontsize=12)
 ax.set_ylabel("Route length saving (%)", fontsize=12)
 ax.set_title("Route Efficiency Gain by Courier — Road Network Distances\n"
-             "Zagreb West HPE, October 2025", fontsize=13)
+             "Zagreb West distribution area, October 2025", fontsize=13)
 ax.legend(fontsize=11)
 ax.grid(True, alpha=0.3, axis="y")
 plt.tight_layout()
@@ -142,7 +142,7 @@ try:
                  bbox=dict(boxstyle="round", facecolor="white", alpha=0.8))
 
     fig.suptitle("Haversine vs. Road Network Route Analysis\n"
-                 "Zagreb West HPE, October 2025", fontsize=14, fontweight="bold")
+                 "Zagreb West distribution area, October 2025", fontsize=14, fontweight="bold")
     plt.tight_layout()
     plt.savefig(OUT4, dpi=150, bbox_inches="tight")
     plt.close()

@@ -2,7 +2,7 @@
 Priprema prosinackog uzorka za usporedbu s listopadskim.
 
 Isti kriteriji kao za listopad:
-- Distributivno podrucje: 10953 Zagreb zapad HPE
+- Distributivno podrucje: Zagreb West distribution area
 - Kuriri s >5000 dostava godisnje (u istom podrucju)
 - Mjesec: prosinac 2025
 
@@ -14,7 +14,7 @@ import numpy as np
 INPUT_FILE = "/podaci/data_fixed/zagreb_deliveries.csv"
 OUTPUT_FILE = "/podaci/data_fixed/zagreb_zapad_prosinac_optimizacija.csv"
 
-FACILITY_NAME = "10953 Zagreb zapad HPE"
+FACILITY_NAME = "Zagreb West distribution area"
 TARGET_MONTH = "2025-12"
 MIN_ANNUAL_DELIVERIES = 5000
 

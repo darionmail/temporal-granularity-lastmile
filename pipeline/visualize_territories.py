@@ -76,7 +76,7 @@ for ax, (method_name, (af, hf)) in zip(axes, METHODS.items()):
     plot_method(method_name, af, hf, ax)
 
 fig.suptitle(f"Hexagonal Territories - Representative Day {representative_day} "
-             f"(Zagreb West HPE, {daily_volume[representative_day]} parcels, 20 couriers)",
+             f"(Zagreb West distribution area, {daily_volume[representative_day]} parcels, 20 couriers)",
              fontsize=15, fontweight="bold")
 plt.tight_layout(rect=[0, 0, 1, 0.96])
 
@@ -88,7 +88,7 @@ print(f"Spremljeno: {out_path}")
 fig2, ax2 = plt.subplots(1, 1, figsize=(11, 10))
 plot_method("Greedy k-means", *METHODS["Greedy k-means"], ax2)
 ax2.set_title(f"Hexagonal Territories - Greedy k-means\n"
-              f"Representative Day {representative_day}, Zagreb West HPE "
+              f"Representative Day {representative_day}, Zagreb West distribution area "
               f"({daily_volume[representative_day]} parcels, 20 couriers)",
               fontsize=13, fontweight="bold")
 out_path2 = os.path.join(OUT_DIR, "teritoriji_greedy_kmeans.png")

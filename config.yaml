@@ -1,5 +1,5 @@
 # Konfiguracija parametara za teritorijalnu optimizaciju
-# Zagreb zapad HPE, listopad 2025, 20 kurira
+# Zagreb West distribution area, listopad 2025, 20 kurira
 
 data:
   input_file: "/podaci/data_fixed/optimizacija_preprocessed.csv"
