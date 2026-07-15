@@ -1,0 +1,13 @@
+*.csv
+*.xlsx
+*.json
+*.pbf
+*.osm
+*.graphml
+*.gz
+cache/
+results/
+__pycache__/
+*.pyc
+*.tmp
+.DS_Store

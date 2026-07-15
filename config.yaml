@@ -1,0 +1,50 @@
+# Konfiguracija parametara za teritorijalnu optimizaciju
+# Zagreb zapad HPE, listopad 2025, 20 kurira
+
+data:
+  input_file: "/podaci/data_fixed/optimizacija_preprocessed.csv"
+  results_dir: "/podaci/data_fixed/rezultati"
+
+# Kapacitetski raspon - izvorni iz rada (Sekcija 2.2, Daily Capacity Constraints)
+# Zadrzano [60,80] kao normativni operativni cilj, ne kalibrirano na stvarni volumen uzorka.
+# Stvarni medijan ovog uzorka je ~61/dan po kuriru, ali pojedini dani imaju ekstreman ukupni
+# volumen (218 do 1423 paketa/dan na 20 kurira) gdje [60,80] nije uvijek fizicki dostizno -
+# to se bilezi kao infeasibility dijagnostika u evaluaciji, ne rjesava promjenom kapaciteta.
+capacity:
+  n_min: 60
+  n_max: 80
+
+# Heksagonalna geometrija (Sekcija 3 rada)
+hexagon:
+  base_lattice_km: 1.0       # bazna lattice za snap-cover-cap (Stage 3)
+  refine_lattice_km: 0.5     # fina lattice za lokalnu optimizaciju (Stage 5)
+  s_base_m: 1000.0           # bazna stranica za floor
+  s_max_m: 2000.0            # stroga gornja granica stranice
+  s_floor_frac: 0.75         # floor = 0.75 * s_base
+
+# Stage 5 - Overlap and Density Refinement scoring funkcija
+# Score_u = sum_v!=u Area(Hu n Hv) + alpha * outside_u + lambda_dens*(Au/Nu) + lambda_eq*(Au/Nu - delta)^2
+refinement:
+  alpha: 1000000.0            # velika penalizacija za parcele izvan vlastitog heksagona
+  lambda_dens: 1.0           # tezina minimizacije density (A/N)
+  lambda_eq: 0.001           # tezina cross-courier equalization
+  max_iterations: 10         # broj iteracija greedy descent po danu/agregatu
+
+# Min-Cost Flow (Metoda 2)
+mcf:
+  distance_penalty_km: 4.0    # prag iznad kojeg se primjenjuje kvadratna penalizacija (tuned varijanta)
+  penalty_weight: 50.0        # koeficijent kvadratne penalizacije
+
+# Weighted Voronoi / Power Diagram (Metoda 3)
+weighted_voronoi:
+  learning_rate_baseline: 1.0
+  learning_rate_tuned: 0.1     # tuned varijanta: 0.1x baseline
+  l2_regularization: 0.01      # tuned varijanta: regularizacija tezina
+  max_iterations: 50
+  convergence_tol: 0.5         # konvergencija ako se kapacitetna devijacija ne mijenja vise od ovoga
+
+# Studijska regija
+region:
+  center_lat: 45.8150
+  center_lon: 15.9819
+  radius_km: 10.0
