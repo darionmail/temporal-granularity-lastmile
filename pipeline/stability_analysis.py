@@ -30,7 +30,7 @@ hex_df = pd.read_csv(os.path.join(RESULTS_DIR, "method1_hexagons.csv"))
 hex_df["date"] = pd.to_datetime(hex_df["date"])
 hex_df = hex_df.sort_values(["UserID", "date"])
 
-# Ucitaj i poligone
+# Load polygons
 hex_df["polygon"] = hex_df["polygon_wkt"].apply(wkt.loads)
 
 dates = sorted(hex_df["date"].unique())

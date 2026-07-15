@@ -57,7 +57,7 @@ def nearest_neighbor_tsp(lats, lons):
         visited[best_j] = True
     return order
 
-# ── Ucitaj podatke ──
+# ── Load data ──
 print("Loading data...")
 df = pd.read_csv(INPUT_FILE, encoding="utf-8")
 df["EventDatetime"] = pd.to_datetime(df["EventDatetime"])

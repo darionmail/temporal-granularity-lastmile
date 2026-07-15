@@ -44,7 +44,7 @@ print("=" * 65)
 
 print("\n── PART 1: Composite Score Weight Sensitivity ──\n")
 
-# Ucitaj post-processed rezultate
+# Load post-processed results
 pp_data = {
     "Greedy k-means":   {"overlap_pct": 61.59, "outside_pct": 0.61, "mean_a_n": 168797},
     "Min-Cost Flow":    {"overlap_pct": 59.76, "outside_pct": 1.28, "mean_a_n": 165606},
@@ -166,7 +166,7 @@ def run_stage5_evaluate(df_assign, hex_df, alpha, lambda_dens,
     outside_pct = 100 * total_outside / total_parcels if total_parcels > 0 else 0
     return overlap_pct, outside_pct
 
-# Ucitaj Method 1 assignments i hexagone
+# Load Method 1 assignments and hexagons
 df_assign = pd.read_csv(os.path.join(RESULTS_DIR, "method1_assignments.csv"))
 hex_df = pd.read_csv(os.path.join(RESULTS_DIR, "method1_hexagons.csv"))
 df_assign["date"] = df_assign["date"].astype(str)

@@ -28,7 +28,7 @@ INPUT_FILE = config["data"]["input_file"]
 OUTPUT_FILE = "results_dir/route_comparison.csv"
 GRAPH_CACHE = os.path.join(os.path.dirname(config["data"]["results_dir"]), "road_network_graph.graphml")
 
-# ── 1. Ucitaj podatke ──
+# ── 1. Load data ──
 print("Loading data...")
 df = pd.read_csv(INPUT_FILE, encoding="utf-8")
 df["EventDatetime"] = pd.to_datetime(df["EventDatetime"])
