@@ -4,7 +4,7 @@
 Method 3: Weighted Voronoi (Power Diagram) (Section 5.3 rada)
 
 Pocevsi od centroid-based seed pozicija, parcele se dodjeljuju prema power distance
-(Euclidean distance minus weight). Tezine se iterativno azuriraju additive shemom
+(Euclidean distance minus weight). Weights are iteratively updated using an additive scheme
 proporcionalnom kapacitetskoj devijaciji na svakom sajtu.
 
 Tuned varijanta: smanjeni learning rate (0.1x baseline), feedback gustoce (A/N) u
