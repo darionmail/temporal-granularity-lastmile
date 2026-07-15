@@ -62,7 +62,7 @@ def main():
     print()
     print("=" * 80)
     print("NAPOMENA: nize vrijednosti su bolje za sve metrike (Outside je posebno kriticno).")
-    print("NAPOMENA: Sum A/N nije normaliziran po danu jer je vec dnevni prosjek (A/N po danu, prosjecen kroz dane).")
+    print("NAPOMENA: Sum A/N nije normaliziran per day jer je vec dnevni prosjek (A/N per day, prosjecen kroz dane).")
     print("NAPOMENA: originalni rad je radio na 5 days / 10 couriers / 1000 parcels; ovaj uzorak na 27 days / 20 couriers / 27029 parcels.")
     print("=" * 80)
 

@@ -34,7 +34,7 @@ def main():
     df["x_m"] = x
     df["y_m"] = y
 
-    # Sortiraj po danu i kuriru za konzistentnost
+    # Sortiraj per day i kuriru za consistentst
     df = df.sort_values(["date", "UserID"]).reset_index(drop=True)
 
     df.to_csv(OUTPUT_FILE, index=False, encoding="utf-8")

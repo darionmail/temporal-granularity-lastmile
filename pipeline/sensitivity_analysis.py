@@ -86,7 +86,7 @@ for scheme_name, (w_ov, w_out, w_dn) in weight_schemes.items():
           f"{scores['Min-Cost Flow']:>8.3f} "
           f"{scores['Weighted Voronoi']:>8.3f}  {ranked[0]}")
 
-# Provjeri konzistentnost
+# Provjeri consistentst
 rank1_methods = set(ranking_results.values())
 if len(rank1_methods) == 1:
     print(f"\n✓ Rank 1 is STABLE across all weight schemes: {list(rank1_methods)[0]}")

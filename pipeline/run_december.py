@@ -172,7 +172,7 @@ def stage5_refinement(points_xy, assignment, hexagons, hex_config, refine_config
 
 
 def run_method1(df, config):
-    """Greedy k-means + hex optimizacija, po danu."""
+    """Greedy k-means + hex optimizacija, per day."""
     hex_config = config["hexagon"]
     refine_config = config["refinement"]
     n_min = config["capacity"]["n_min"]
@@ -216,7 +216,7 @@ def run_method1(df, config):
 
 
 def evaluate_daily(df, hex_df):
-    """Pet metrika po danu, agregirano."""
+    """Pet metrika per day, agregirano."""
     from shapely import wkt
     from shapely.geometry import Point
 

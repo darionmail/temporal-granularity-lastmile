@@ -1,9 +1,9 @@
 """
 03_min_cost_flow.py
 
-Method 2: Min-Cost Flow Assignment (Sekcija 5.2 rada)
+Method 2: Min-Cost Flow Assignment (Section 5.2 rada)
 
-Parcele se dodjeljuju kuririma po danu koristeci min-cost flow s kapacitetskim
+Parcele se dodjeljuju kuririma per day koristeci min-cost flow s kapacitetskim
 ogranicenjima. Edge costovi = Euclidean distance. Tuned varijanta dodaje mekanu
 kvadratnu penalizaciju za dodjele preko 4km (distance_penalty_km).
 
@@ -221,7 +221,7 @@ def main():
 
     print(f"\nDodijeljeno {(df['assigned_courier'].notna()).sum():,} od {len(df):,} parcels.")
 
-    # Konstrukcija heksagona PO DANU (konzistentno s metodologijom rada - dnevni teritoriji)
+    # Konstrukcija heksagona PO DANU (consistent s metodologijom rada - dnevni teritoriji)
     print("\nKonstrukcija heksagonalnih teritorija (snap-cover-cap) PO DANU...")
     all_hex_rows = []
     for date, day_df in df.groupby("date"):

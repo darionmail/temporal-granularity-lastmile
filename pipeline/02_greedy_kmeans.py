@@ -1,19 +1,19 @@
 """
 02_greedy_kmeans_hex.py (v2 - PO DANU)
 
-Method 1: Capacitated k-Means with Hexagonal Optimization (Sekcija 5.1 rada)
-RESTRUKTURIRANO: svih 5 stadija se izvode PO DANU (konzistentno s originalnim
+Method 1: Capacitated k-Means with Hexagonal Optimization (Section 5.1 rada)
+RESTRUKTURIRANO: svih 5 stagea se izvode PO DANU (consistent s originalnim
 radom koji je radio 5 dnevnih snapshotova), umjesto agregacije kroz cijeli mjesec.
 
 Za svaki dan:
   Stage 1: Banded Assignment (Greedy CKM) na tockama TOG days
-  Stage 2: (preskoceno - nema stabilizacije kroz dane jer je svaki dan zaseban)
-  Stage 3: Snap-Cover-Cap Hexagon Construction (na temelju centroida TOG days)
+  Stage 2: (skipped - no cross-day stabilization since each day is independent)
+  Stage 3: Snap-Cover-Cap Hexagon Construction (na temelju centroids TOG days)
   Stage 4: Polygon-Aware Post-Reallocation (unutar TOG days)
   Stage 5: Overlap and Density Refinement (unutar TOG days)
 
-Finalni rezultat: 20 couriers x 27 days = do 540 dnevnih heksagona.
-Assignments CSV ima sve pakete s kolonom 'assigned_courier' (po danu).
+Finalni rezultat: 20 couriers x 27 days = do 540 daily hexagons.
+Assignments CSV ima sve pakete s kolonom 'assigned_courier' (per day).
 Hexagons CSV ima jedan red po (kurir, dan) kombinaciji.
 
 Run: python3 02_greedy_kmeans_hex.py
@@ -89,7 +89,7 @@ def greedy_capacitated_kmeans_day(points_xy, courier_ids, n_min, n_max, max_iter
 
 
 # ============================================================
-# STAGE 3: Snap-Cover-Cap Hexagon Construction (po danu)
+# STAGE 3: Snap-Cover-Cap Hexagon Construction (per day)
 # ============================================================
 
 def build_day_hexagons(day_points_xy, assignment, centroids, courier_ids, hex_config):
@@ -112,7 +112,7 @@ def build_day_hexagons(day_points_xy, assignment, centroids, courier_ids, hex_co
 
 
 # ============================================================
-# STAGE 4: Polygon-Aware Post-Reallocation (po danu)
+# STAGE 4: Polygon-Aware Post-Reallocation (per day)
 # ============================================================
 
 def stage4_polygon_reallocation_day(day_points_xy, assignment, hexagons, courier_ids):
@@ -145,7 +145,7 @@ def stage4_polygon_reallocation_day(day_points_xy, assignment, hexagons, courier
 
 
 # ============================================================
-# STAGE 5: Overlap and Density Refinement (po danu)
+# STAGE 5: Overlap and Density Refinement (per day)
 # ============================================================
 
 def compute_score(cid, candidate_poly, candidate_s, hexagons, day_points_xy, assignment, alpha, lambda_dens, lambda_eq, delta):

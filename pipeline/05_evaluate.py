@@ -1,7 +1,7 @@
 """
 05_evaluate.py (v2 - PO DANU)
 
-Racuna pet evaluacijskih metrika iz rada (Sekcija 6.2), ali sada PO DANU
+Racuna pet evaluacijskih metrika iz rada (Section 6.2), ali sada PO DANU
 (jer hexagons CSV ima kolonu 'date' - svaki dan ima svoj nezavisni set heksagona).
 
 Metrike se racunaju za SVAKI dan posebno, pa agregiraju (sum/mean kroz dane)

@@ -4,7 +4,7 @@ Analysis stabilnosti teritorija dan-na-dan (Territory Stability Analysis)
 Za svaki kurir i svaki par uzastopnih days racuna:
 1. Centroid displacement (m) - koliko se centar heksagona pomakne
 2. Overlap between consecutive days (%) - what fraction of territory remains the same
-3. Promjena velicine (stranica heksagona)
+3. Promjena velicine (side length heksagona)
 
 Takodjer racuna agregiranu "prostornu volatilnost" po kuriru kroz cijeli mjesec.
 

@@ -1,11 +1,11 @@
 """
 Heksagonalna geometrija: axial koordinate, snap-cover-cap konstrukcija,
-povrsina/inradius, prema formulaciji iz rada (Sekcija 3 - Spatial Discretization
+area/inradius, prema formulaciji iz rada (Section 3 - Spatial Discretization
 and Hexagonal Geometry).
 
-Pointy-topped regularni heksagon sa stranicom s (metri):
-  A(s) = (3*sqrt(3)/2) * s^2          [povrsina]
-  r(s) = (sqrt(3)/2) * s              [inradius - okomita distanca centar->rub]
+Pointy-topped regular hexagon sa stranicom s (metri):
+  A(s) = (3*sqrt(3)/2) * s^2          [area]
+  r(s) = (sqrt(3)/2) * s              [inradius - perpendicular distance centar->rub]
 
 Axial -> Cartesian (pointy-topped):
   x = s*sqrt(3) * (q + r/2)
@@ -85,7 +85,7 @@ def snap_to_lattice(x, y, lattice_s):
 
 def hex_polygon(center_x, center_y, s):
     """
-    Vraca shapely Polygon za pointy-topped regularni heksagon sa zadanim centrom i stranicom s.
+    Vraca shapely Polygon za pointy-topped regular hexagon sa zadanim centrom i stranicom s.
     Pointy-topped: vrhovi na uglovima 90, 150, 210, 270, 330, 30 stupnjeva (vrh gore/dolje).
     """
     angles_deg = [90, 150, 210, 270, 330, 30]
@@ -100,10 +100,10 @@ def hex_polygon(center_x, center_y, s):
 
 def snap_cover_cap(center_x, center_y, points_xy, lattice_s=1000.0, s_base=1000.0, s_max=2000.0, s_floor_frac=0.75):
     """
-    Snap-Cover-Cap konstrukcija heksagonalnog teritorija (Sekcija 3.4 rada).
+    Snap-Cover-Cap konstrukcija heksagonalnog teritorija (Section 3.4 rada).
 
     Step 1 (Snap): centar se snapa na najblizu 1km lattice pozciju.
-    Step 2 (Cover): minimalna stranica koja pokriva sve dodijeljene tocke:
+    Step 2 (Cover): minimalna side length koja pokriva sve dodijeljene tocke:
         s_needed = (2/sqrt(3)) * max_x ||x - c*||
     Step 3 (Cap): s = min(max(s_needed, 0.75*s_base), s_max)
 

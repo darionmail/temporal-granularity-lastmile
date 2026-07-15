@@ -1,7 +1,7 @@
 """
 04_weighted_voronoi.py
 
-Method 3: Weighted Voronoi (Power Diagram) (Sekcija 5.3 rada)
+Method 3: Weighted Voronoi (Power Diagram) (Section 5.3 rada)
 
 Pocevsi od centroid-based seed pozicija, parcele se dodjeljuju prema power distance
 (Euclidean distance minus weight). Tezine se iterativno azuriraju additive shemom
@@ -153,7 +153,7 @@ def main():
 
     print(f"\nDodijeljeno {(df['assigned_courier'].notna()).sum():,} od {len(df):,} parcels.")
 
-    # Konstrukcija heksagona PO DANU (konzistentno s metodologijom rada - dnevni teritoriji)
+    # Konstrukcija heksagona PO DANU (consistent s metodologijom rada - dnevni teritoriji)
     print("\nKonstrukcija heksagonalnih teritorija (snap-cover-cap) PO DANU...")
     all_hex_rows = []
     for date, day_df in df.groupby("date"):
