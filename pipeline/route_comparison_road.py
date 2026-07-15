@@ -16,11 +16,17 @@ import pandas as pd
 import osmnx as ox
 import networkx as nx
 import warnings
+import yaml
+import os
+
+with open(os.path.join(os.path.dirname(__file__), "..", "config.yaml")) as f:
+    config = yaml.safe_load(f)
+
 warnings.filterwarnings("ignore")
 
-INPUT_FILE = "/podaci/data_fixed/zagreb_zapad_listopad_optimizacija.csv"
-OUTPUT_FILE = "/podaci/data_fixed/rezultati/route_comparison.csv"
-GRAPH_CACHE = "/podaci/data_fixed/zagreb_zapad_graph.graphml"
+INPUT_FILE = config["data"]["input_file"]
+OUTPUT_FILE = "results_dir/route_comparison.csv"
+GRAPH_CACHE = "os.path.join(os.path.dirname(config["data"]["results_dir"]), "zagreb_zapad_graph.graphml")"
 
 # ── 1. Ucitaj podatke ──
 print("Ucitavam podatke...")

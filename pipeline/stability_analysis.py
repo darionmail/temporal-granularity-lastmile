@@ -14,8 +14,14 @@ import os
 import numpy as np
 import pandas as pd
 from shapely import wkt
+import yaml
+import os
 
-RESULTS_DIR = "/podaci/data_fixed/rezultati"
+with open(os.path.join(os.path.dirname(__file__), "..", "config.yaml")) as f:
+    config = yaml.safe_load(f)
+
+
+RESULTS_DIR = config["data"]["results_dir"]
 OUT_PATH = os.path.join(RESULTS_DIR, "stability_analysis.csv")
 OUT_SUMMARY = os.path.join(RESULTS_DIR, "stability_summary.csv")
 

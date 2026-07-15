@@ -24,7 +24,7 @@ from hex_utils import snap_cover_cap, get_neighbor_centers, hex_area
 CONFIG = {
     "data": {
         "input_file": "/podaci/data_fixed/zagreb_zapad_prosinac_optimizacija.csv",
-        "results_dir": "/podaci/data_fixed/rezultati_prosinac",
+        "results_dir": "results_dir_prosinac",
     },
     "capacity": {"n_min": 60, "n_max": 80},
     "hexagon": {

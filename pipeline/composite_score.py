@@ -5,8 +5,14 @@ Pokreni: python3 skripte/composite_score_pp.py
 import os
 import numpy as np
 import pandas as pd
+import yaml
+import os
 
-RESULTS_DIR = "/podaci/data_fixed/rezultati"
+with open(os.path.join(os.path.dirname(__file__), "..", "config.yaml")) as f:
+    config = yaml.safe_load(f)
+
+
+RESULTS_DIR = config["data"]["results_dir"]
 
 df = pd.read_csv(os.path.join(RESULTS_DIR, "evaluation_two_stage.csv"))
 

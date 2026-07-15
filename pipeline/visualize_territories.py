@@ -13,12 +13,18 @@ import os
 import numpy as np
 import pandas as pd
 import matplotlib
+import yaml
+import os
+
+with open(os.path.join(os.path.dirname(__file__), "..", "config.yaml")) as f:
+    config = yaml.safe_load(f)
+
 matplotlib.use("Agg")  # bez GUI-a, samo file output
 import matplotlib.pyplot as plt
 from matplotlib.patches import Polygon as MplPolygon
 from shapely import wkt
 
-RESULTS_DIR = "/podaci/data_fixed/rezultati"
+RESULTS_DIR = config["data"]["results_dir"]
 OUT_DIR = RESULTS_DIR
 
 METHODS = {

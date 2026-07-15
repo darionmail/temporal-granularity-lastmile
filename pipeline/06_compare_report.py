@@ -9,8 +9,14 @@ Pokreni: python3 06_compare_report.py
 """
 import os
 import pandas as pd
+import yaml
+import os
 
-RESULTS_DIR = "/podaci/data_fixed/rezultati"
+with open(os.path.join(os.path.dirname(__file__), "..", "config.yaml")) as f:
+    config = yaml.safe_load(f)
+
+
+RESULTS_DIR = config["data"]["results_dir"]
 SUMMARY_PATH = os.path.join(RESULTS_DIR, "evaluation_summary.csv")
 
 

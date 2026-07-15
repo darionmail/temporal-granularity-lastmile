@@ -20,13 +20,19 @@ import numpy as np
 import pandas as pd
 from shapely import wkt
 from shapely.geometry import Point
+import yaml
+import os
+
+with open(os.path.join(os.path.dirname(__file__), "..", "config.yaml")) as f:
+    config = yaml.safe_load(f)
+
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(SCRIPT_DIR, "common"))
 
 from hex_utils import snap_cover_cap, get_neighbor_centers, hex_area
 
-RESULTS_DIR = "/podaci/data_fixed/rezultati"
+RESULTS_DIR = config["data"]["results_dir"]
 
 # ============================================================
 # PART 1: Composite Score Sensitivity (brzo, bez ponovnog racunanja)

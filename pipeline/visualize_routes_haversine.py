@@ -9,13 +9,19 @@ Pokreni: python3 skripte/vizualiziraj_rute.py
 import numpy as np
 import pandas as pd
 import matplotlib
+import yaml
+import os
+
+with open(os.path.join(os.path.dirname(__file__), "..", "config.yaml")) as f:
+    config = yaml.safe_load(f)
+
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
-INPUT  = "/podaci/data_fixed/rezultati/route_comparison_haversine.csv"
-OUT1   = "/podaci/data_fixed/rezultati/route_saving_histogram.png"
-OUT2   = "/podaci/data_fixed/rezultati/route_saving_by_courier.png"
-OUT3   = "/podaci/data_fixed/rezultati/route_actual_vs_optimal.png"
+INPUT  = "results_dir/route_comparison_haversine.csv"
+OUT1   = "results_dir/route_saving_histogram.png"
+OUT2   = "results_dir/route_saving_by_courier.png"
+OUT3   = "results_dir/route_actual_vs_optimal.png"
 
 df = pd.read_csv(INPUT)
 df["UserID"] = df["UserID"].astype(int)

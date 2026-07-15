@@ -14,8 +14,14 @@ import itertools
 import numpy as np
 import pandas as pd
 from scipy.stats import wilcoxon
+import yaml
+import os
 
-RESULTS_DIR = "/podaci/data_fixed/rezultati"
+with open(os.path.join(os.path.dirname(__file__), "..", "config.yaml")) as f:
+    config = yaml.safe_load(f)
+
+
+RESULTS_DIR = config["data"]["results_dir"]
 
 METHODS = {
     "Greedy k-means": "daily_detail_Greedy_k-means.csv",

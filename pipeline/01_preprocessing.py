@@ -10,12 +10,18 @@ Pokreni: python3 01_preprocessing.py
 import sys
 import os
 import pandas as pd
+import yaml
+import os
+
+with open(os.path.join(os.path.dirname(__file__), "..", "config.yaml")) as f:
+    config = yaml.safe_load(f)
+
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "common"))
 from geo_utils import latlon_to_xy
 
-INPUT_FILE = "/podaci/data_fixed/zagreb_zapad_listopad_optimizacija.csv"
-OUTPUT_FILE = "/podaci/data_fixed/optimizacija_preprocessed.csv"
+INPUT_FILE = config["data"]["input_file"]
+OUTPUT_FILE = config["data"]["input_file"]
 
 
 def main():

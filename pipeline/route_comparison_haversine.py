@@ -12,9 +12,15 @@ Pokreni: python3 skripte/usporedi_rute_haversine.py
 """
 import numpy as np
 import pandas as pd
+import yaml
+import os
 
-INPUT_FILE = "/podaci/data_fixed/zagreb_zapad_listopad_optimizacija.csv"
-OUTPUT_FILE = "/podaci/data_fixed/rezultati/route_comparison_haversine.csv"
+with open(os.path.join(os.path.dirname(__file__), "..", "config.yaml")) as f:
+    config = yaml.safe_load(f)
+
+
+INPUT_FILE = config["data"]["input_file"]
+OUTPUT_FILE = "results_dir/route_comparison_haversine.csv"
 
 def haversine_km(lat1, lon1, lat2, lon2):
     """Udaljenost između dvije GPS točke u km (crow-flies)."""

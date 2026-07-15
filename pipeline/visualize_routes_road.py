@@ -9,14 +9,20 @@ Pokreni: python3 skripte/vizualiziraj_rute_cestovne.py
 import numpy as np
 import pandas as pd
 import matplotlib
+import yaml
+import os
+
+with open(os.path.join(os.path.dirname(__file__), "..", "config.yaml")) as f:
+    config = yaml.safe_load(f)
+
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
-INPUT  = "/podaci/data_fixed/rezultati/route_comparison.csv"
-OUT1   = "/podaci/data_fixed/rezultati/road_saving_histogram.png"
-OUT2   = "/podaci/data_fixed/rezultati/road_saving_by_courier.png"
-OUT3   = "/podaci/data_fixed/rezultati/road_actual_vs_optimal.png"
-OUT4   = "/podaci/data_fixed/rezultati/road_vs_haversine_comparison.png"
+INPUT  = "results_dir/route_comparison.csv"
+OUT1   = "results_dir/road_saving_histogram.png"
+OUT2   = "results_dir/road_saving_by_courier.png"
+OUT3   = "results_dir/road_actual_vs_optimal.png"
+OUT4   = "results_dir/road_vs_haversine_comparison.png"
 
 df = pd.read_csv(INPUT)
 df["UserID"] = df["UserID"].astype(int)
@@ -103,7 +109,7 @@ print(f"Spremljeno: {OUT3}")
 # ── Figure 4: Usporedba Haversine vs Cestovne udaljenosti ──
 # Ucitaj i Haversine rezultate za usporedbu
 try:
-    df_h = pd.read_csv("/podaci/data_fixed/rezultati/route_comparison_haversine.csv")
+    df_h = pd.read_csv("results_dir/route_comparison_haversine.csv")
     df_h["UserID"] = df_h["UserID"].astype(int)
 
     fig, axes = plt.subplots(1, 2, figsize=(14, 6))

@@ -2,8 +2,8 @@
 # Zagreb West distribution area, listopad 2025, 20 kurira
 
 data:
-  input_file: "/podaci/data_fixed/optimizacija_preprocessed.csv"
-  results_dir: "/podaci/data_fixed/rezultati"
+  input_file: "data/input.csv"  # Update this path to your preprocessed data file
+  results_dir: "results"
 
 # Kapacitetski raspon - izvorni iz rada (Sekcija 2.2, Daily Capacity Constraints)
 # Zadrzano [60,80] kao normativni operativni cilj, ne kalibrirano na stvarni volumen uzorka.
