@@ -2,15 +2,15 @@
 02_greedy_kmeans_hex.py (v2 - PO DANU)
 
 Method 1: Capacitated k-Means with Hexagonal Optimization (Section 5.1 rada)
-RESTRUKTURIRANO: svih 5 stagea se izvode PO DANU (consistent s originalnim
-radom koji je radio 5 dnevnih snapshotova), umjesto agregacije kroz cijeli mjesec.
+RESTRUCTURED: all 5 stages are executed PER DAY (consistent with the original
+paper which used 5 daily snapshots), instead of aggregating across the full month.
 
 Za svaki dan:
-  Stage 1: Banded Assignment (Greedy CKM) na tockama TOG days
+  Stage 1: Banded Assignment (Greedy CKM) on that day's delivery points
   Stage 2: (skipped - no cross-day stabilization since each day is independent)
-  Stage 3: Snap-Cover-Cap Hexagon Construction (na temelju centroids TOG days)
-  Stage 4: Polygon-Aware Post-Reallocation (unutar TOG days)
-  Stage 5: Overlap and Density Refinement (unutar TOG days)
+  Stage 3: Snap-Cover-Cap Hexagon Construction (based on that day's centroids)
+  Stage 4: Polygon-Aware Post-Reallocation (within that day)
+  Stage 5: Overlap and Density Refinement (within that day)
 
 Finalni rezultat: 20 couriers x 27 days = do 540 daily hexagons.
 Assignments CSV ima sve pakete s kolonom 'assigned_courier' (per day).
@@ -313,7 +313,7 @@ def main():
         print(f"\nUPOZORENJE: {n_days_infeasible} days je teorijski infeasible za [{n_min},{n_max}] kapacitet.")
         print(f"UPOZORENJE: {n_courier_violations} (kurir, dan) parova zavrsilo izvan [{n_min},{n_max}] raspona.")
     else:
-        print(f"\nSvi dani/kuriri su unutar [{n_min},{n_max}] kapaciteta.")
+        print(f"\nAll days/couriers are within [{n_min},{n_max}] kapaciteta.")
 
     os.makedirs(config["data"]["results_dir"], exist_ok=True)
     out_assignments = os.path.join(config["data"]["results_dir"], "method1_assignments.csv")

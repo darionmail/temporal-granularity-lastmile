@@ -75,7 +75,7 @@ def solve_day_mcf(points_xy, point_ids, courier_ids, n_min, n_max, tuned=False,
         p_node = f"P_{pid}"
         for cid in courier_ids:
             c_node = f"C_{cid}"
-            # Privremeno - distanca do "centra" couriers ce se racunati na temelju
+            # Distance to courier 'center' will be computed based on
             # trenutne dodjele iz prethodne iteracije; za pocetnu MCF dodjelu koristimo
             # udaljenost do najblize tocke medju vec dodijeljenima (ili globalni centroid)
             pass  # cost se postavlja izvana, vidi solve_day_mcf_with_costs
@@ -145,7 +145,7 @@ def build_and_solve_mcf(points_xy, point_ids, courier_centers, n_max, tuned, pen
 def solve_day(day_df, courier_ids, n_min, n_max, tuned, penalty_km, penalty_weight, max_outer_iter=5):
     """
     Iterativni MCF: pocni s centroidima = prosjek svih tocaka podijeljen nasumicno,
-    pa iterativno azuriraj centre couriers na temelju dodjele (slicno Lloyd's algoritmu,
+    then iteratively update courier centers based on assignment (similar to Lloyd's algorithm,
     ali assignment step je MCF umjesto nearest-neighbor).
     """
     points_xy = day_df[["x_m", "y_m"]].values
@@ -167,7 +167,7 @@ def solve_day(day_df, courier_ids, n_min, n_max, tuned, penalty_km, penalty_weig
     for outer_iter in range(max_outer_iter):
         assignment = build_and_solve_mcf(points_xy, point_ids, courier_centers, n_max, tuned, penalty_km, penalty_weight)
 
-        # Update centra na temelju nove dodjele
+        # Update center based on new assignment
         new_centers = {}
         for cid in courier_ids:
             assigned_idx = [i for i, pid in enumerate(point_ids) if assignment.get(pid) == cid]

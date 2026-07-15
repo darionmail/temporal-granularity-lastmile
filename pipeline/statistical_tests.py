@@ -3,7 +3,7 @@ Statisticki testovi s korekcijom za visestruke usporedbe.
 
 Provodi parovne Wilcoxon signed-rank testove na dnevnim metrikama,
 te primjenjuje Bonferroni i Benjamini-Hochberg (FDR) korekciju
-na p-vrijednosti unutar svake metrike.
+on p-values within each metric.
 
 Dodatno: testira Std A/N (mjera koja se prikazuje ali nije bila testirana).
 
@@ -63,7 +63,7 @@ print("PAROVNI WILCOXON TESTOVI S BONFERRONI I FDR KOREKCIJOM")
 print("=" * 90)
 print(f"\nNumber parova metoda po metrici: {n_pairs}")
 print(f"Bonferroni correction: pomnozi p s {n_pairs}, ogranici na 1.0")
-print(f"FDR korekcija (Benjamini-Hochberg): primjenjena unutar svake metrike\n")
+print(f"FDR correction (Benjamini-Hochberg): applied within each metric\n")
 
 all_results = []
 

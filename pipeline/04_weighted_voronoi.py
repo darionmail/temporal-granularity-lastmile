@@ -58,7 +58,7 @@ def weighted_voronoi_iterate(points_xy, courier_ids, n_min, n_max, tuned, learni
     Iterativni weighted Voronoi / power diagram solver.
 
     Pocetne pozicije: nasumicni odabir tocaka kao seedovi.
-    Tezine: pocinju na 0, azuriraju se additive na temelju kapacitetske devijacije:
+    Weights: start at 0, updated additively based on capacity deviation:
         w_u <- w_u + lr * (N_u - target_N)
     gdje je target_N = (n_min+n_max)/2 ili stvarni prosjek.
 

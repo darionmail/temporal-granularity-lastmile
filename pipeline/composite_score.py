@@ -27,7 +27,7 @@ print("=" * 60)
 metrics = ["overlap_pct", "outside_pct", "mean_a_n"]
 labels  = ["Overlap%", "Outside%", "Mean A/N"]
 
-# Normalize to [0,1] unutar pp skupa
+# Normalize to [0,1] within pp set
 norm = pd.DataFrame(index=pp.index)
 for m in metrics:
     mn, mx = pp[m].min(), pp[m].max()
