@@ -222,7 +222,7 @@ def main():
     print(f"\nDodijeljeno {(df['assigned_courier'].notna()).sum():,} od {len(df):,} parcels.")
 
     # Hexagon construction PER DAY (consistent with paper methodology - daily territories)
-    print("\nKonstrukcija heksagonalnih teritorija (snap-cover-cap) PO DANU...")
+    print("\nBuilding hexagonal territories (snap-cover-cap) PER DAY...")
     all_hex_rows = []
     for date, day_df in df.groupby("date"):
         active_couriers = sorted(day_df["UserID"].unique())

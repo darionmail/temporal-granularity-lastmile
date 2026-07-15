@@ -2,7 +2,7 @@
 06_compare_report.py
 
 Generira finalni usporedni izvjestaj svih metoda, formatiran slicno Tablici 2 iz rada.
-Dodaje dnevno-normalizirane vrijednosti (podijeljeno s n_days) za izravnu usporedbu
+Adds daily-normalized values (divided by n_days) for direct comparison
 s originalnim radom koji je radio na 5-dnevnom uzorku, ne 27-dnevnom.
 
 Run: python3 06_compare_report.py
@@ -66,7 +66,7 @@ def main():
     print("NAPOMENA: originalni rad je radio na 5 days / 10 couriers / 1000 parcels; ovaj uzorak na 27 days / 20 couriers / 27029 parcels.")
     print("=" * 80)
 
-    print("\nNajbolja metoda po metrici (dnevno-normalizirano):")
+    print("\nBest method per metric (daily-normalized):")
     for col, label in [("overlap_km2_per_day", "Overlap/dan"), ("sum_a_n", "Sum A/N"),
                         ("mean_a_n", "Mean A/N"), ("std_a_n", "Std A/N"), ("outside_per_day", "Outside/dan")]:
         best_row = df.loc[df[col].idxmin()]

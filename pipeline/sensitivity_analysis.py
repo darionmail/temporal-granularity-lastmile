@@ -1,7 +1,7 @@
 """
 Sensitivity Analysis za:
 1. Stage 5 parameters: alpha (10^4 do 10^7) i lambda_dens (0.1, 1.0, 10.0)
-   - Pokrecemo Stage 5 s razlicitim parametersma na postojecim assignments
+   - Runs Stage 5 with different parameters on existing assignments
    - Usporedujemo finalni ranking metoda
 
 2. Composite score tezine:
