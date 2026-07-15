@@ -216,7 +216,7 @@ def run_method1(df, config):
 
 
 def evaluate_daily(df, hex_df):
-    """Pet metrika per day, agregirano."""
+    """Five metrics per day, aggregated."""
     from shapely import wkt
     from shapely.geometry import Point
 

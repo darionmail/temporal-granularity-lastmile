@@ -1,12 +1,12 @@
 """
 Analysis stabilnosti teritorija dan-na-dan (Territory Stability Analysis)
 
-Za svaki kurir i svaki par uzastopnih days racuna:
+For each courier and each pair of consecutive days computes:
 1. Centroid displacement (m) - koliko se centar heksagona pomakne
 2. Overlap between consecutive days (%) - what fraction of territory remains the same
 3. Promjena velicine (side length heksagona)
 
-Takodjer racuna agregiranu "prostornu volatilnost" po kuriru kroz cijeli mjesec.
+Also computes aggregated 'spatial volatility' per courier across the full month.
 
 Run: python3 stability_analysis.py
 """

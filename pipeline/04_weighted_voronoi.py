@@ -153,7 +153,7 @@ def main():
 
     print(f"\nDodijeljeno {(df['assigned_courier'].notna()).sum():,} od {len(df):,} parcels.")
 
-    # Konstrukcija heksagona PO DANU (consistent s metodologijom rada - dnevni teritoriji)
+    # Hexagon construction PER DAY (consistent with paper methodology - daily territories)
     print("\nKonstrukcija heksagonalnih teritorija (snap-cover-cap) PO DANU...")
     all_hex_rows = []
     for date, day_df in df.groupby("date"):

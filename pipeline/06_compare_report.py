@@ -28,7 +28,7 @@ def main():
     df["sort_key"] = df["method"].apply(lambda m: order.index(m) if m in order else 999)
     df = df.sort_values("sort_key").drop(columns=["sort_key"])
 
-    # Dnevno-normalizirane vrijednosti (overlap i outside su SUME kroz dane; A/N metrike su vec prosjeci)
+    # Daily-normalized values (overlap and outside are SUMS across days; A/N metrics are already averages)
     df["overlap_km2_per_day"] = df["overlap_km2"] / df["n_days"]
     df["outside_per_day"] = df["outside"] / df["n_days"]
 
@@ -47,7 +47,7 @@ def main():
 
     print()
     print("=" * 80)
-    print("DNEVNO-NORMALIZIRANE VRIJEDNOSTI (za usporedbu s originalnim 5-dnevnim radom)")
+    print("DAILY-NORMALIZED VALUES (for comparability with the original paper)")
     print("=" * 80)
     print()
 
@@ -61,8 +61,8 @@ def main():
 
     print()
     print("=" * 80)
-    print("NAPOMENA: nize vrijednosti su bolje za sve metrike (Outside je posebno kriticno).")
-    print("NAPOMENA: Sum A/N nije normaliziran per day jer je vec dnevni prosjek (A/N per day, prosjecen kroz dane).")
+    print("NOTE: lower values are better for all metrics (Outside is particularly critical).")
+    print("NOTE: Sum A/N is not normalized per day as it is already a daily average (A/N per day, averaged across days).")
     print("NAPOMENA: originalni rad je radio na 5 days / 10 couriers / 1000 parcels; ovaj uzorak na 27 days / 20 couriers / 27029 parcels.")
     print("=" * 80)
 

@@ -1,7 +1,7 @@
 """
 Normalized overlap - overlap as percentage of total territory area.
 
-Za svaki dan i svaku metodu racuna:
+For each day and each method computes:
   overlap_pct = (total pairwise overlap) / (total area of all hexagons that day) * 100
 
 Run: python3 normaliziraj_overlap.py

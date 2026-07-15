@@ -35,7 +35,7 @@ from hex_utils import snap_cover_cap, get_neighbor_centers, hex_area
 RESULTS_DIR = config["data"]["results_dir"]
 
 # ============================================================
-# PART 1: Composite Score Sensitivity (brzo, bez ponovnog racunanja)
+# PART 1: Composite Score Sensitivity (fast, no recomputation needed)
 # ============================================================
 
 print("=" * 65)
@@ -102,7 +102,7 @@ print("Running Stage 5 with different alpha/lambda on Method 1 (Greedy k-means)\
 
 def run_stage5_evaluate(df_assign, hex_df, alpha, lambda_dens,
                         lambda_eq=0.001, max_iter=5):
-    """Pokrecemo Stage 5 s danim parametersma, vracamo aggregate metrike."""
+    """Runs Stage 5 with given parameters, returns aggregate metrics."""
     from postprocessing import stage5_refinement, stage4_reallocation
 
     hex_config = {

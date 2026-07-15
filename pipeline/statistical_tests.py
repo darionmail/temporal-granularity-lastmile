@@ -1,7 +1,7 @@
 """
 Statisticki testovi s korekcijom za visestruke usporedbe.
 
-Provodi parovne Wilcoxon signed-rank testove na dnevnim metrikama,
+Conducts pairwise Wilcoxon signed-rank tests on daily metrics,
 te primjenjuje Bonferroni i Benjamini-Hochberg (FDR) korekciju
 on p-values within each metric.
 

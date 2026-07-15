@@ -8,7 +8,7 @@ ogranicenjima. Edge costovi = Euclidean distance. Tuned varijanta dodaje mekanu
 kvadratnu penalizaciju za dodjele preko 4km (distance_penalty_km).
 
 Nakon dodjele, konvertira se u heksagonalne teritorije koristeci snap-cover-cap
-(ista procedura kao Method 1, Stage 3) za usporedivost.
+(same procedure as Method 1, Stage 3) for comparability.
 
 Run:
   python3 03_min_cost_flow.py            # baseline
@@ -221,7 +221,7 @@ def main():
 
     print(f"\nDodijeljeno {(df['assigned_courier'].notna()).sum():,} od {len(df):,} parcels.")
 
-    # Konstrukcija heksagona PO DANU (consistent s metodologijom rada - dnevni teritoriji)
+    # Hexagon construction PER DAY (consistent with paper methodology - daily territories)
     print("\nKonstrukcija heksagonalnih teritorija (snap-cover-cap) PO DANU...")
     all_hex_rows = []
     for date, day_df in df.groupby("date"):

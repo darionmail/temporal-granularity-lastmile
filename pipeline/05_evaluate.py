@@ -22,7 +22,7 @@ from shapely.geometry import Point
 
 
 def evaluate_day(day_assignments, day_hexagons_df):
-    """Racuna metrike za jedan dan. Vraca dict ili None ako nema heksagona."""
+    """Computes metrics for one day. Returns dict or None if no hexagons."""
     if len(day_hexagons_df) == 0:
         return None
 
@@ -119,7 +119,7 @@ def main():
     results, daily_df = evaluate(method_name, assignments_csv, hexagons_csv)
 
     print("=" * 60)
-    print(f"EVALUACIJA: {method_name}  (agregirano kroz {results['n_days']} days)")
+    print(f"EVALUATION: {method_name}  (aggregated across {results['n_days']} days)")
     print("=" * 60)
     for k, v in results.items():
         print(f"  {k}: {v}")
