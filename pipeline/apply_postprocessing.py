@@ -2,7 +2,7 @@
 primijeni_postprocessing.py
 
 Primjenjuje Stage 4-5 post-processing na MCF i Voronoi rezultate
-koji već postoje na serveru, pa evaluira sve metode u dvije varijante:
+that already exist, then evaluates all methods in two variants:
   - "raw"  : samo algoritamska dodjela (Stage 1-3 / Stage 1 za MCF/Voronoi)
   - "pp"   : s post-processingom (Stage 4-5 za sve metode)
 

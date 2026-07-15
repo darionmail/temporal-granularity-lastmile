@@ -123,7 +123,7 @@ print(f"\nAverage saving: {results_df['saving_km'].mean():.1f} km/day "
 print(f"Total saving across all pairs: {results_df['saving_km'].sum():.0f} km")
 
 print(f"\nNapomena: udaljenosti su crow-flies (Haversine), ne cestovne.")
-print(f"  Cestovne su tipično 1.2-1.4x vece (urban road factor).")
+print(f"  Road distances are typically 1.2-1.4x larger (urban road factor).")
 print(f"  Omjer stvarna/optimalna ostaje metodoloski valjan za usporedbu.")
 print(f"\nSaved: {OUTPUT_FILE}")
 print("\nDONE.")

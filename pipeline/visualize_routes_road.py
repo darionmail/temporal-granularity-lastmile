@@ -2,7 +2,7 @@
 vizualiziraj_rute_cestovne.py
 
 Visualization rezultata usporedbe stvarnih i optimalnih ruta
-koristeći stvarne cestovne udaljenosti (OSMnx).
+using actual road network distances (OSMnx).
 
 Run: python3 skripte/vizualiziraj_rute_cestovne.py
 """
@@ -27,7 +27,7 @@ OUT4   = "results_dir/road_vs_haversine_comparison.png"
 df = pd.read_csv(INPUT)
 df["UserID"] = df["UserID"].astype(int)
 
-# ── Figure 1: Histogram uštede (%) — cestovne ──
+# ── Figure 1: Saving histogram (%) — road network ──
 fig, ax = plt.subplots(figsize=(10, 6))
 ax.hist(df["saving_pct"], bins=30, color="#2E5C8A", edgecolor="white", alpha=0.85)
 ax.axvline(df["saving_pct"].mean(), color="#E24B4A", linewidth=2,
@@ -114,7 +114,7 @@ try:
 
     fig, axes = plt.subplots(1, 2, figsize=(14, 6))
 
-    # Lijevo: distribucija uštede %
+    # Left: saving distribution (%)
     axes[0].hist(df_h["saving_pct"], bins=25, alpha=0.6,
                  color="#E24B4A", label=f"Haversine (mean={df_h['saving_pct'].mean():.1f}%)",
                  edgecolor="white")
@@ -155,6 +155,6 @@ try:
     print(f"Saved: {OUT4}")
     print(f"\nStvarni road factor (median): {road_factor:.2f}x")
 except FileNotFoundError:
-    print("Haversine results nisu pronađeni, preskačem Figure 4")
+    print("Haversine results not found, skipping Figure 4")
 
 print("\nDONE.")

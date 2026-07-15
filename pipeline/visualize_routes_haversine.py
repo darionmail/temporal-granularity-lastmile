@@ -26,7 +26,7 @@ OUT3   = "results_dir/route_actual_vs_optimal.png"
 df = pd.read_csv(INPUT)
 df["UserID"] = df["UserID"].astype(int)
 
-# ── Figure 1: Histogram uštede (%) ──
+# ── Figure 1: Saving histogram (%) ──
 fig, ax = plt.subplots(figsize=(10, 6))
 ax.hist(df["saving_pct"], bins=30, color="#2E5C8A", edgecolor="white", alpha=0.85)
 ax.axvline(df["saving_pct"].mean(), color="#E24B4A", linewidth=2,
@@ -51,7 +51,7 @@ plt.savefig(OUT1, dpi=150, bbox_inches="tight")
 plt.close()
 print(f"Saved: {OUT1}")
 
-# ── Figure 2: Box plot uštede po kuriru ──
+# ── Figure 2: Box plot of saving by courier ──
 fig, ax = plt.subplots(figsize=(14, 6))
 couriers = sorted(df["UserID"].unique())
 data_by_courier = [df[df["UserID"] == c]["saving_pct"].values for c in couriers]

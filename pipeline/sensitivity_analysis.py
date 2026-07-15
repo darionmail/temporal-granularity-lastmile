@@ -188,7 +188,7 @@ lambda_values = [0.1, 1.0, 10.0]
 print()
 for lam in lambda_values:
     if lam == 1.0:
-        # Već imamo ovaj rezultat
+        # Already have this result
         r = [x for x in alpha_results if x["alpha"] == 1e6]
         if r:
             print(f"{'1e6':>12} {lam:>12.1f} {r[0]['overlap_pct']:>10.2f} {r[0]['outside_pct']:>10.2f}")

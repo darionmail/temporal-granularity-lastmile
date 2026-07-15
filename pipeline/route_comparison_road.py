@@ -1,11 +1,11 @@
 """
 usporedi_rute.py
 
-Za svaki (kurir, dan) uspoređuje:
+For each (courier, day) pair compares:
 1. Stvarnu rutu (redoslijed iz EventDatetime timestampova)
 2. Optimalnu rutu (TSP nearest-neighbor heuristika)
 
-Koristeći OSMnx cestovni graf za Zagreb.
+Using OSMnx road network graph.
 
 Run: python3 skripte/usporedi_rute.py
 """
@@ -54,11 +54,11 @@ else:
 
 print(f"Graf: {G.number_of_nodes()} cvorova, {G.number_of_edges()} bridova")
 
-# ── 3. Helper: ukupna duljina rute po redoslijedu točaka ──
+# ── 3. Helper: total route length for a given sequence of points ──
 def route_length_km(G, lats, lons):
     """
-    Izračunava ukupnu duljinu rute (km) za zadani redoslijed točaka.
-    Koristi OSMnx shortest_path između uzastopnih točaka.
+    Computes total route length (km) for a given sequence of points.
+    Uses OSMnx shortest_path between consecutive points.
     """
     if len(lats) < 2:
         return 0.0
@@ -68,7 +68,7 @@ def route_length_km(G, lats, lons):
     for i in range(len(nodes) - 1):
         try:
             path = nx.shortest_path(G, nodes[i], nodes[i+1], weight="length")
-            # OSMnx 2.x: suma duljina bridova duž puta
+            # OSMnx 2.x: sum of edge lengths along path
             total_m += sum(
                 G[path[j]][path[j+1]][0].get("length", 0)
                 for j in range(len(path) - 1)
@@ -90,9 +90,9 @@ def route_length_km(G, lats, lons):
 def nearest_neighbor_tsp(lats, lons):
     """
     Nearest-neighbor TSP heuristika.
-    Počinje od prve točke (depot/distribucijsko središte),
-    uvijek ide na najbližu neposjećenu točku.
-    Vraća optimirani redoslijed indeksa.
+    Starts from the first point (depot/distribution center),
+    always moves to the nearest unvisited point.
+    Returns optimized index order.
     """
     n = len(lats)
     if n <= 2:
@@ -143,7 +143,7 @@ for idx, ((uid, date), day_df) in enumerate(groups):
     if n < 2:
         continue
 
-    # Stvarna ruta (već sortirana po EventDatetime)
+    # Actual route (already sorted by EventDatetime)
     actual_km = route_length_km(G, lats, lons)
 
     # Optimalna ruta (TSP nearest-neighbor)
@@ -152,7 +152,7 @@ for idx, ((uid, date), day_df) in enumerate(groups):
     opt_lons = lons[opt_order]
     optimal_km = route_length_km(G, opt_lats, opt_lons)
 
-    # Ušteda
+    # Saving
     saving_km = actual_km - optimal_km
     saving_pct = 100 * saving_km / actual_km if actual_km > 0 else 0.0
 
@@ -178,12 +178,12 @@ print(f"\n--- Stvarna ruta (km/dan) ---")
 print(results_df["actual_km"].describe().round(2))
 print(f"\n--- Optimalna ruta (km/dan) ---")
 print(results_df["optimal_km"].describe().round(2))
-print(f"\n--- Ušteda (km/dan) ---")
+print(f"\n--- Saving (km/day) ---")
 print(results_df["saving_km"].describe().round(2))
-print(f"\n--- Ušteda (%) ---")
+print(f"\n--- Saving (%) ---")
 print(results_df["saving_pct"].describe().round(1))
-print(f"\nUkupna ušteda kroz sve (kurir,dan) parove: {results_df['saving_km'].sum():.1f} km")
-print(f"Prosjecna ušteda po danu po kuriru: {results_df['saving_km'].mean():.1f} km ({results_df['saving_pct'].mean():.1f}%)")
+print(f"\nTotal saving across all (courier,day) pairs: {results_df['saving_km'].sum():.1f} km")
+print(f"Average saving per day per courier: {results_df['saving_km'].mean():.1f} km ({results_df['saving_pct'].mean():.1f}%)")
 
 print(f"\nSaved: {OUTPUT_FILE}")
 print("\nDONE.")
