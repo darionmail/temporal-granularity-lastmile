@@ -1,15 +1,15 @@
 """
-05_evaluate.py (v2 - PO DANU)
+05_evaluate.py (v2 - PER DAY)
 
-Racuna pet evaluacijskih metrika iz rada (Section 6.2), ali sada PO DANU
-(jer hexagons CSV ima kolonu 'date' - svaki dan ima svoj nezavisni set heksagona).
+Computes five evaluation metrics from the paper (Section 6.2), per day
+(hexagons CSV has a 'date' column - each day has its own independent set of hexagons).
 
-Metrike se racunaju za SVAKI dan posebno, pa agregiraju (sum/mean kroz dane)
-za usporedivost s originalnim radom koji je radio na 5-dnevnom prosjeku.
+Metrics are computed for EACH day separately, then aggregated (sum/mean across days)
+for comparability with the paper results.
 
-- Overlap (km^2): SUMA preklapanja kroz sve dane
-- Sum A/N, Mean A/N, Std A/N: PROSJEK kroz dane (prosjecni dnevni A/N)
-- Outside: SUMA broja parcels izvan dodijeljenog heksagona kroz sve dane
+- Overlap (km^2): SUM of overlap across all days
+- Sum A/N, Mean A/N, Std A/N: MEAN across days (average daily A/N)
+- Outside: SUM of parcels outside their assigned hexagon across all days
 
 Run: python3 05_evaluate.py <method_name> <assignments_csv> <hexagons_csv>
 """
