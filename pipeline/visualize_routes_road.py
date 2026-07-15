@@ -107,7 +107,7 @@ plt.close()
 print(f"Saved: {OUT3}")
 
 # ── Figure 4: Comparison Haversine vs Cestovne udaljenosti ──
-# Ucitaj i Haversine rezultate za usporedbu
+# Load Haversine results for comparison
 try:
     df_h = pd.read_csv("results_dir/route_comparison_haversine.csv")
     df_h["UserID"] = df_h["UserID"].astype(int)

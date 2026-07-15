@@ -1,5 +1,5 @@
 """
-Priprema Decemberkog uzorka za usporedbu s Octoberskim.
+Prepares December dataset for comparison with October.
 
 Isti kriteriji kao za October:
 - Distributivno podrucje: Zagreb West distribution area
