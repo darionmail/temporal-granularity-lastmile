@@ -1,6 +1,6 @@
 """
 Composite score za post-processed rezultate.
-Pokreni: python3 skripte/composite_score_pp.py
+Run: python3 skripte/composite_score_pp.py
 """
 import os
 import numpy as np
@@ -46,7 +46,7 @@ norm["score_outside"] = (
 norm["rank_equal"]   = norm["score_equal"].rank().astype(int)
 norm["rank_outside"] = norm["score_outside"].rank().astype(int)
 
-print("\n--- Normalizirane vrijednosti (pp, 0=best) ---")
+print("\n--- Normalized values (pp, 0=best) ---")
 print(norm[metrics].round(3).to_string())
 
 print("\n--- Composite Score (jednake tezine) ---")
@@ -55,7 +55,7 @@ print(norm[["score_equal","rank_equal"]].sort_values("score_equal").round(3).to_
 print("\n--- Composite Score (outside prioritet) ---")
 print(norm[["score_outside","rank_outside"]].sort_values("score_outside").round(3).to_string())
 
-# Usporedba raw vs pp composite
+# Comparison raw vs pp composite
 print("\n" + "=" * 60)
 print("USPOREDBA RAW vs PP COMPOSITE SCORE (jednake tezine)")
 print("=" * 60)
@@ -80,4 +80,4 @@ for method_pp, method_raw in [
     print(f"{label:<25}: raw rank={rank_raw}, pp rank={rank_pp}  "
           f"(score raw={score_raw:.3f} → pp={score_pp:.3f})")
 
-print("\nGOTOVO.")
+print("\nDONE.")

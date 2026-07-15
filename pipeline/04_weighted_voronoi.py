@@ -1,7 +1,7 @@
 """
 04_weighted_voronoi.py
 
-Metoda 3: Weighted Voronoi (Power Diagram) (Sekcija 5.3 rada)
+Method 3: Weighted Voronoi (Power Diagram) (Sekcija 5.3 rada)
 
 Pocevsi od centroid-based seed pozicija, parcele se dodjeljuju prema power distance
 (Euclidean distance minus weight). Tezine se iterativno azuriraju additive shemom
@@ -10,7 +10,7 @@ proporcionalnom kapacitetskoj devijaciji na svakom sajtu.
 Tuned varijanta: smanjeni learning rate (0.1x baseline), feedback gustoce (A/N) u
 azuriranju tezina, i L2 regularizacija da se sprijeci divergencija tezina.
 
-Pokreni:
+Run:
   python3 04_weighted_voronoi.py            # baseline
   python3 04_weighted_voronoi.py --tuned    # tuned varijanta
 """
@@ -151,7 +151,7 @@ def main():
 
         df.loc[day_df.index, "assigned_courier"] = assignment
 
-    print(f"\nDodijeljeno {(df['assigned_courier'].notna()).sum():,} od {len(df):,} paketa.")
+    print(f"\nDodijeljeno {(df['assigned_courier'].notna()).sum():,} od {len(df):,} parcels.")
 
     # Konstrukcija heksagona PO DANU (konzistentno s metodologijom rada - dnevni teritoriji)
     print("\nKonstrukcija heksagonalnih teritorija (snap-cover-cap) PO DANU...")
@@ -178,7 +178,7 @@ def main():
             })
 
     hex_df = pd.DataFrame(all_hex_rows)
-    print(f"Ukupno heksagona (kurir x dan): {len(hex_df):,}")
+    print(f"Total heksagona (kurir x dan): {len(hex_df):,}")
 
     suffix = "tuned" if args.tuned else "baseline"
     os.makedirs(config["data"]["results_dir"], exist_ok=True)
@@ -188,10 +188,10 @@ def main():
     out_hexagons = os.path.join(config["data"]["results_dir"], f"method3_voronoi_{suffix}_hexagons.csv")
     hex_df.to_csv(out_hexagons, index=False)
 
-    print(f"\nRezultati spremljeni:")
+    print(f"\nResults spremljeni:")
     print(f"  {out_assignments}")
     print(f"  {out_hexagons}")
-    print("\nGOTOVO.")
+    print("\nDONE.")
 
 
 if __name__ == "__main__":

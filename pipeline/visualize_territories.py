@@ -1,13 +1,13 @@
 """
-Vizualizacija heksagonalnih teritorija za jedan reprezentativni dan.
+Visualization heksagonalnih teritorija za jedan reprezentativni dan.
 
-Odabire dan najblizi medijalnom dnevnom volumenu (izbjegava ekstreme),
+Odabire dan najblizi medijalnom dnevnom volumeu (izbjegava ekstreme),
 te crta teritorije + dodijeljene pakete za sve tri glavne metode
 (Greedy k-means, MCF baseline, Weighted Voronoi baseline) radi vizualne usporedbe.
 
-Sprema PNG fajlove u rezultati/ folder.
+Sprema PNG fajlove u results/ folder.
 
-Pokreni: python3 vizualiziraj_teritorije.py
+Run: python3 vizualiziraj_teritorije.py
 """
 import os
 import numpy as np
@@ -33,12 +33,12 @@ METHODS = {
     "Weighted Voronoi": ("method3_voronoi_baseline_assignments.csv", "method3_voronoi_baseline_hexagons.csv"),
 }
 
-# Odaberi reprezentativni dan iz Method 1 (najblizi medijalnom volumenu)
+# Odaberi reprezentativni dan iz Method 1 (najblizi medijalnom volumeu)
 m1_assign = pd.read_csv(os.path.join(RESULTS_DIR, "method1_assignments.csv"))
 daily_volume = m1_assign.groupby("date").size()
 median_vol = daily_volume.median()
 representative_day = (daily_volume - median_vol).abs().idxmin()
-print(f"Reprezentativni dan: {representative_day} (volumen={daily_volume[representative_day]}, medijan={median_vol:.0f})")
+print(f"Representative day: {representative_day} (volume={daily_volume[representative_day]}, median={median_vol:.0f})")
 
 # Paleta boja za kurire (konzistentna kroz metode)
 all_couriers = sorted(m1_assign["UserID"].dropna().unique())
@@ -86,9 +86,9 @@ fig.suptitle(f"Hexagonal Territories - Representative Day {representative_day} "
              fontsize=15, fontweight="bold")
 plt.tight_layout(rect=[0, 0, 1, 0.96])
 
-out_path = os.path.join(OUT_DIR, "teritoriji_usporedba.png")
+out_path = os.path.join(OUT_DIR, "teritoriji_comparison.png")
 plt.savefig(out_path, dpi=150, bbox_inches="tight")
-print(f"Spremljeno: {out_path}")
+print(f"Saved: {out_path}")
 
 # Zasebna, veca figura samo za Greedy k-means (primarna metoda)
 fig2, ax2 = plt.subplots(1, 1, figsize=(11, 10))
@@ -99,6 +99,6 @@ ax2.set_title(f"Hexagonal Territories - Greedy k-means\n"
               fontsize=13, fontweight="bold")
 out_path2 = os.path.join(OUT_DIR, "teritoriji_greedy_kmeans.png")
 plt.savefig(out_path2, dpi=150, bbox_inches="tight")
-print(f"Spremljeno: {out_path2}")
+print(f"Saved: {out_path2}")
 
-print("\nGOTOVO.")
+print("\nDONE.")

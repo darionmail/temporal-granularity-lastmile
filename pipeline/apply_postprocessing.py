@@ -6,10 +6,10 @@ koji već postoje na serveru, pa evaluira sve metode u dvije varijante:
   - "raw"  : samo algoritamska dodjela (Stage 1-3 / Stage 1 za MCF/Voronoi)
   - "pp"   : s post-processingom (Stage 4-5 za sve metode)
 
-Rezultati se zapisuju u:
+Results se zapisuju u:
   results_dir/evaluation_two_stage.csv
 
-Pokreni: python3 skripte/primijeni_postprocessing.py
+Run: python3 skripte/primijeni_postprocessing.py
 """
 import sys
 import os
@@ -158,12 +158,12 @@ summary_df.to_csv(out_path, index=False)
 print("\n" + "=" * 70)
 print("FINALNA USPOREDBA — RAW vs POST-PROCESSED")
 print("=" * 70)
-print(f"\n{'Metoda':<30} {'Overlap/dan (km2)':>18} {'Overlap%':>9} {'Outside/dan':>12} {'Outside%':>9}")
+print(f"\n{'Method':<30} {'Overlap/dan (km2)':>18} {'Overlap%':>9} {'Outside/dan':>12} {'Outside%':>9}")
 print("-" * 80)
 for _, row in summary_df.iterrows():
     print(f"{row['method']:<30} {row['overlap_km2_per_day']:>18.2f} "
           f"{row['overlap_pct']:>8.2f}% {row['outside_per_day']:>12.1f} "
           f"{row['outside_pct']:>8.2f}%")
 
-print(f"\nSpremljeno: {out_path}")
-print("\nGOTOVO.")
+print(f"\nSaved: {out_path}")
+print("\nDONE.")

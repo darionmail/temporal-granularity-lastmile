@@ -1,10 +1,10 @@
 """
-Pokretanje optimizacijskih algoritama za prosinacki uzorak.
+Pokretanje optimizacijskih algoritama za Decemberki uzorak.
 
-Koristi iste algoritme kao za listopad, samo s prosinackim datasetom.
-Rezultati se spremaju u posebnu mapu da ne prepisuju listopadske.
+Koristi iste algoritme kao za October, samo s Decemberkim datasetom.
+Results se spremaju u posebnu mapu da ne prepisuju Octoberske.
 
-Pokreni: python3 pokreni_prosinac.py
+Run: python3 pokreni_December.py
 """
 import sys
 import os
@@ -20,11 +20,11 @@ sys.path.insert(0, os.path.join(SCRIPT_DIR, "common"))
 
 from hex_utils import snap_cover_cap, get_neighbor_centers, hex_area
 
-# Prosinacki config - razlikuje se od listopadskog samo u input/output putanjama
+# Prosinacki config - razlikuje se od Octoberskog samo u input/output putanjama
 CONFIG = {
     "data": {
         "input_file": config["data"].get("input_file_december", "data/december_input.csv"),
-        "results_dir": "results_dir_prosinac",
+        "results_dir": "results_dir_December",
     },
     "capacity": {"n_min": 60, "n_max": 80},
     "hexagon": {
@@ -210,7 +210,7 @@ def run_method1(df, config):
                 "polygon_wkt": h["polygon"].wkt,
             })
         if day_counter % 5 == 0 or day_counter == n_days:
-            print(f"  Dan {day_counter}/{n_days} ({date}): {n_points} paketa, {k} kurira")
+            print(f"  Dan {day_counter}/{n_days} ({date}): {n_points} parcels, {k} couriers")
 
     return df, pd.DataFrame(all_hex_rows), pd.DataFrame(infeasibility)
 
@@ -279,7 +279,7 @@ print("=" * 60)
 df = pd.read_csv(CONFIG["data"]["input_file"], encoding="utf-8")
 df["date"] = pd.to_datetime(df["EventDatetime"]).dt.date.astype(str)
 
-print(f"\nUkupno paketa: {len(df):,}")
+print(f"\nTotal parcels: {len(df):,}")
 print(f"Kurira: {df['UserID'].nunique()}")
 print(f"Dana: {df['date'].nunique()}")
 
@@ -287,22 +287,22 @@ t0 = time.time()
 df_out, hex_df, infeasibility_df = run_method1(df, CONFIG)
 elapsed = time.time() - t0
 
-# Spremi
+# Save
 df_out.to_csv(os.path.join(CONFIG["data"]["results_dir"], "method1_assignments.csv"), index=False)
 hex_df.to_csv(os.path.join(CONFIG["data"]["results_dir"], "method1_hexagons.csv"), index=False)
 infeasibility_df.to_csv(os.path.join(CONFIG["data"]["results_dir"], "infeasibility.csv"), index=False)
 
 print(f"\nTrajanje: {elapsed:.0f}s")
-print(f"Infeasible dana: {len(infeasibility_df)} od {df['date'].nunique()} ({100*len(infeasibility_df)/df['date'].nunique():.1f}%)")
+print(f"Infeasible days: {len(infeasibility_df)} od {df['date'].nunique()} ({100*len(infeasibility_df)/df['date'].nunique():.1f}%)")
 
-# Evaluacija
-print("\nEvaluacija...")
+# Evaluation
+print("\nEvaluation...")
 hex_df["date"] = hex_df["date"].astype(str)
 daily = evaluate_daily(df_out, hex_df)
 daily.to_csv(os.path.join(CONFIG["data"]["results_dir"], "daily_detail_method1.csv"), index=False)
 
 print("\n" + "=" * 60)
-print("REZULTATI (Greedy k-means, prosinac 2025)")
+print("REZULTATI (Greedy k-means, December 2025)")
 print("=" * 60)
 print(f"\nOverlap/dan (km2):  {daily['overlap_km2'].mean():.2f} +/- {daily['overlap_km2'].std():.2f}")
 print(f"Mean A/N (m2/pak):  {daily['mean_a_n'].mean():.0f} +/- {daily['mean_a_n'].std():.0f}")
@@ -310,4 +310,4 @@ print(f"Std A/N:            {daily['std_a_n'].mean():.1f}")
 print(f"Outside/dan:        {daily['outside'].mean():.2f} +/- {daily['outside'].std():.2f}")
 print(f"Outside %:          {100*daily['outside'].sum()/daily['n_parcels'].sum():.2f}%")
 
-print("\nGOTOVO.")
+print("\nDONE.")

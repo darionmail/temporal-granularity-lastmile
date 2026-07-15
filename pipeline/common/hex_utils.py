@@ -107,12 +107,12 @@ def snap_cover_cap(center_x, center_y, points_xy, lattice_s=1000.0, s_base=1000.
         s_needed = (2/sqrt(3)) * max_x ||x - c*||
     Step 3 (Cap): s = min(max(s_needed, 0.75*s_base), s_max)
 
-    Parametri:
+    Parameters:
         center_x, center_y: kandidat centar (metri, prije snapanja)
         points_xy: lista/array (x,y) parova - sve tocke dodijeljene ovom kuriru
         lattice_s: velicina lattice celije za snapping (default 1km kao u radu)
-        s_base: bazna stranica za floor (default 1000m)
-        s_max: stroga gornja granica stranice (default 2000m)
+        s_base: base side length for floor calculation (default 1000m)
+        s_max: strict upper bound on hexagon side length (default 2000m)
         s_floor_frac: udio s_base za floor (default 0.75)
 
     Vraca: (x_snap, y_snap, s, polygon)

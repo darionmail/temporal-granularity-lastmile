@@ -9,9 +9,9 @@ za usporedivost s originalnim radom koji je radio na 5-dnevnom prosjeku.
 
 - Overlap (km^2): SUMA preklapanja kroz sve dane
 - Sum A/N, Mean A/N, Std A/N: PROSJEK kroz dane (prosjecni dnevni A/N)
-- Outside: SUMA broja paketa izvan dodijeljenog heksagona kroz sve dane
+- Outside: SUMA broja parcels izvan dodijeljenog heksagona kroz sve dane
 
-Pokreni: python3 05_evaluate.py <method_name> <assignments_csv> <hexagons_csv>
+Run: python3 05_evaluate.py <method_name> <assignments_csv> <hexagons_csv>
 """
 import sys
 import os
@@ -119,7 +119,7 @@ def main():
     results, daily_df = evaluate(method_name, assignments_csv, hexagons_csv)
 
     print("=" * 60)
-    print(f"EVALUACIJA: {method_name}  (agregirano kroz {results['n_days']} dana)")
+    print(f"EVALUACIJA: {method_name}  (agregirano kroz {results['n_days']} days)")
     print("=" * 60)
     for k, v in results.items():
         print(f"  {k}: {v}")
@@ -143,7 +143,7 @@ def main():
     )
     daily_df.to_csv(daily_detail_path, index=False)
 
-    print(f"\nSpremljeno u: {summary_path}")
+    print(f"\nSaved u: {summary_path}")
     print(f"Dnevni detalj spremljen u: {daily_detail_path}")
 
 

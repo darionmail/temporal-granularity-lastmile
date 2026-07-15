@@ -5,7 +5,7 @@ Generira finalni usporedni izvjestaj svih metoda, formatiran slicno Tablici 2 iz
 Dodaje dnevno-normalizirane vrijednosti (podijeljeno s n_days) za izravnu usporedbu
 s originalnim radom koji je radio na 5-dnevnom uzorku, ne 27-dnevnom.
 
-Pokreni: python3 06_compare_report.py
+Run: python3 06_compare_report.py
 """
 import os
 import pandas as pd
@@ -33,7 +33,7 @@ def main():
     df["outside_per_day"] = df["outside"] / df["n_days"]
 
     print("=" * 80)
-    print("FINALNA USPOREDBA METODA - Zagreb West distribution area, listopad 2025 (SIROVO, 27 dana)")
+    print("FINAL METHOD COMPARISON - Zagreb West distribution area, October 2025 (RAW, 27 days)")
     print("=" * 80)
     print()
 
@@ -63,7 +63,7 @@ def main():
     print("=" * 80)
     print("NAPOMENA: nize vrijednosti su bolje za sve metrike (Outside je posebno kriticno).")
     print("NAPOMENA: Sum A/N nije normaliziran po danu jer je vec dnevni prosjek (A/N po danu, prosjecen kroz dane).")
-    print("NAPOMENA: originalni rad je radio na 5 dana / 10 kurira / 1000 paketa; ovaj uzorak na 27 dana / 20 kurira / 27029 paketa.")
+    print("NAPOMENA: originalni rad je radio na 5 days / 10 couriers / 1000 parcels; ovaj uzorak na 27 days / 20 couriers / 27029 parcels.")
     print("=" * 80)
 
     print("\nNajbolja metoda po metrici (dnevno-normalizirano):")

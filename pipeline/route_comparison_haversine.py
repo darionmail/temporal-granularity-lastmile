@@ -8,7 +8,7 @@ Za svaki (kurir, dan) uspoređuje:
 Koristi Haversine (crow-flies) udaljenosti — ne treba internet ni OSMnx graf.
 Omjer stvarna/optimalna ostaje metodološki valjan za usporedbu efikasnosti.
 
-Pokreni: python3 skripte/usporedi_rute_haversine.py
+Run: python3 skripte/usporedi_rute_haversine.py
 """
 import numpy as np
 import pandas as pd
@@ -58,7 +58,7 @@ def nearest_neighbor_tsp(lats, lons):
     return order
 
 # ── Ucitaj podatke ──
-print("Ucitavam podatke...")
+print("Loading data...")
 df = pd.read_csv(INPUT_FILE, encoding="utf-8")
 df["EventDatetime"] = pd.to_datetime(df["EventDatetime"])
 df["date"] = df["EventDatetime"].dt.date
@@ -66,7 +66,7 @@ df = df.sort_values(["UserID", "date", "EventDatetime"])
 print(f"  Paketa: {len(df):,}, Kurira: {df['UserID'].nunique()}, Dana: {df['date'].nunique()}")
 
 # ── Glavna petlja ──
-print("\nRacunam rute...")
+print("\nComputing rute...")
 results = []
 groups = list(df.groupby(["UserID", "date"]))
 
@@ -97,7 +97,7 @@ for idx, ((uid, date), day_df) in enumerate(groups):
         "saving_pct": round(saving_pct, 1),
     })
 
-# ── Rezultati ──
+# ── Results ──
 results_df = pd.DataFrame(results)
 results_df.to_csv(OUTPUT_FILE, index=False)
 
@@ -125,5 +125,5 @@ print(f"Ukupna ušteda kroz sve parove: {results_df['saving_km'].sum():.0f} km")
 print(f"\nNapomena: udaljenosti su crow-flies (Haversine), ne cestovne.")
 print(f"  Cestovne su tipično 1.2-1.4x vece (urban road factor).")
 print(f"  Omjer stvarna/optimalna ostaje metodoloski valjan za usporedbu.")
-print(f"\nSpremljeno: {OUTPUT_FILE}")
-print("\nGOTOVO.")
+print(f"\nSaved: {OUTPUT_FILE}")
+print("\nDONE.")

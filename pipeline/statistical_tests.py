@@ -7,7 +7,7 @@ na p-vrijednosti unutar svake metrike.
 
 Dodatno: testira Std A/N (mjera koja se prikazuje ali nije bila testirana).
 
-Pokreni: python3 statisticki_testovi_korekcija.py
+Run: python3 statisticki_testovi_korekcija.py
 """
 import os
 import itertools
@@ -61,8 +61,8 @@ n_pairs = len(list(itertools.combinations(methods_list, 2)))
 print("=" * 90)
 print("PAROVNI WILCOXON TESTOVI S BONFERRONI I FDR KOREKCIJOM")
 print("=" * 90)
-print(f"\nBroj parova metoda po metrici: {n_pairs}")
-print(f"Bonferroni korekcija: pomnozi p s {n_pairs}, ogranici na 1.0")
+print(f"\nNumber parova metoda po metrici: {n_pairs}")
+print(f"Bonferroni correction: pomnozi p s {n_pairs}, ogranici na 1.0")
 print(f"FDR korekcija (Benjamini-Hochberg): primjenjena unutar svake metrike\n")
 
 all_results = []
@@ -111,17 +111,17 @@ results_df = pd.DataFrame(all_results)
 out_path = os.path.join(RESULTS_DIR, "statistical_tests_with_correction.csv")
 results_df.to_csv(out_path, index=False)
 
-# Sazetak koliko ih prezivi korekciju
+# Summary koliko ih prezivi korekciju
 print("\n" + "=" * 90)
-print("SAZETAK")
+print("SUMMARY")
 print("=" * 90)
 n_raw_sig = sum(1 for p in results_df["raw_p"] if p < 0.05)
 n_bonf_sig = sum(1 for p in results_df["bonferroni_p"] if p < 0.05)
 n_fdr_sig = results_df["significant_after_fdr"].sum()
-print(f"\nUkupno usporedbi: {len(results_df)}")
-print(f"Znacajno (sirovo p < 0.05): {n_raw_sig}")
-print(f"Znacajno nakon Bonferroni: {n_bonf_sig}")
-print(f"Znacajno nakon FDR (Benjamini-Hochberg, q < 0.05): {n_fdr_sig}")
+print(f"\nTotal comparisons: {len(results_df)}")
+print(f"Significant (sirovo p < 0.05): {n_raw_sig}")
+print(f"Significant nakon Bonferroni: {n_bonf_sig}")
+print(f"Significant nakon FDR (Benjamini-Hochberg, q < 0.05): {n_fdr_sig}")
 
-print(f"\nSpremljeno: {out_path}")
-print("\nGOTOVO.")
+print(f"\nSaved: {out_path}")
+print("\nDONE.")

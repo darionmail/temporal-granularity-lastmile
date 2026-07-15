@@ -1,10 +1,10 @@
 """
 vizualiziraj_rute.py
 
-Vizualizacija rezultata usporedbe stvarnih i optimalnih ruta.
-Sprema PNG u rezultati/ folder.
+Visualization rezultata usporedbe stvarnih i optimalnih ruta.
+Sprema PNG u results/ folder.
 
-Pokreni: python3 skripte/vizualiziraj_rute.py
+Run: python3 skripte/vizualiziraj_rute.py
 """
 import numpy as np
 import pandas as pd
@@ -49,7 +49,7 @@ ax.text(0.5, -0.13, note, transform=ax.transAxes,
 plt.tight_layout()
 plt.savefig(OUT1, dpi=150, bbox_inches="tight")
 plt.close()
-print(f"Spremljeno: {OUT1}")
+print(f"Saved: {OUT1}")
 
 # ── Figure 2: Box plot uštede po kuriru ──
 fig, ax = plt.subplots(figsize=(14, 6))
@@ -74,7 +74,7 @@ ax.grid(True, alpha=0.3, axis="y")
 plt.tight_layout()
 plt.savefig(OUT2, dpi=150, bbox_inches="tight")
 plt.close()
-print(f"Spremljeno: {OUT2}")
+print(f"Saved: {OUT2}")
 
 # ── Figure 3: Scatter actual vs optimal ──
 fig, ax = plt.subplots(figsize=(8, 8))
@@ -103,6 +103,6 @@ ax.text(0.05, 0.93,
 plt.tight_layout()
 plt.savefig(OUT3, dpi=150, bbox_inches="tight")
 plt.close()
-print(f"Spremljeno: {OUT3}")
+print(f"Saved: {OUT3}")
 
-print("\nGOTOVO.")
+print("\nDONE.")

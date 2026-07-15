@@ -1,16 +1,16 @@
 """
 03_min_cost_flow.py
 
-Metoda 2: Min-Cost Flow Assignment (Sekcija 5.2 rada)
+Method 2: Min-Cost Flow Assignment (Sekcija 5.2 rada)
 
 Parcele se dodjeljuju kuririma po danu koristeci min-cost flow s kapacitetskim
 ogranicenjima. Edge costovi = Euclidean distance. Tuned varijanta dodaje mekanu
 kvadratnu penalizaciju za dodjele preko 4km (distance_penalty_km).
 
 Nakon dodjele, konvertira se u heksagonalne teritorije koristeci snap-cover-cap
-(ista procedura kao Metoda 1, Stage 3) za usporedivost.
+(ista procedura kao Method 1, Stage 3) za usporedivost.
 
-Pokreni:
+Run:
   python3 03_min_cost_flow.py            # baseline
   python3 03_min_cost_flow.py --tuned    # tuned varijanta s distance penalty
 """
@@ -68,14 +68,14 @@ def solve_day_mcf(points_xy, point_ids, courier_ids, n_min, n_max, tuned=False,
     for cid in courier_ids:
         node = f"C_{cid}"
         G.add_node(node, demand=0)
-        # Upper bound kapacitet kurira tog dana
+        # Upper bound kapacitet couriers tog days
         G.add_edge(node, sink, capacity=n_max, weight=0)
 
     for i, pid in enumerate(point_ids):
         p_node = f"P_{pid}"
         for cid in courier_ids:
             c_node = f"C_{cid}"
-            # Privremeno - distanca do "centra" kurira ce se racunati na temelju
+            # Privremeno - distanca do "centra" couriers ce se racunati na temelju
             # trenutne dodjele iz prethodne iteracije; za pocetnu MCF dodjelu koristimo
             # udaljenost do najblize tocke medju vec dodijeljenima (ili globalni centroid)
             pass  # cost se postavlja izvana, vidi solve_day_mcf_with_costs
@@ -86,7 +86,7 @@ def solve_day_mcf(points_xy, point_ids, courier_ids, n_min, n_max, tuned=False,
 def build_and_solve_mcf(points_xy, point_ids, courier_centers, n_max, tuned, penalty_km, penalty_weight):
     """
     Gradi i rjesava MCF graf gdje su kuririma vec dodijeljeni privremeni centri
-    (iz prethodne iteracije ili inicijalizacije), a cost = distanca tocka<->centar kurira.
+    (iz prethodne iteracije ili inicijalizacije), a cost = distanca tocka<->centar couriers.
     """
     G = nx.DiGraph()
     n_points = len(points_xy)
@@ -145,7 +145,7 @@ def build_and_solve_mcf(points_xy, point_ids, courier_centers, n_max, tuned, pen
 def solve_day(day_df, courier_ids, n_min, n_max, tuned, penalty_km, penalty_weight, max_outer_iter=5):
     """
     Iterativni MCF: pocni s centroidima = prosjek svih tocaka podijeljen nasumicno,
-    pa iterativno azuriraj centre kurira na temelju dodjele (slicno Lloyd's algoritmu,
+    pa iterativno azuriraj centre couriers na temelju dodjele (slicno Lloyd's algoritmu,
     ali assignment step je MCF umjesto nearest-neighbor).
     """
     points_xy = day_df[["x_m", "y_m"]].values
@@ -219,7 +219,7 @@ def main():
         for idx, row in day_df.iterrows():
             df.loc[idx, "assigned_courier"] = assignment.get(row["ShipmentItemBarcode"])
 
-    print(f"\nDodijeljeno {(df['assigned_courier'].notna()).sum():,} od {len(df):,} paketa.")
+    print(f"\nDodijeljeno {(df['assigned_courier'].notna()).sum():,} od {len(df):,} parcels.")
 
     # Konstrukcija heksagona PO DANU (konzistentno s metodologijom rada - dnevni teritoriji)
     print("\nKonstrukcija heksagonalnih teritorija (snap-cover-cap) PO DANU...")
@@ -246,7 +246,7 @@ def main():
             })
 
     hex_df = pd.DataFrame(all_hex_rows)
-    print(f"Ukupno heksagona (kurir x dan): {len(hex_df):,}")
+    print(f"Total heksagona (kurir x dan): {len(hex_df):,}")
 
     suffix = "tuned" if args.tuned else "baseline"
     os.makedirs(config["data"]["results_dir"], exist_ok=True)
@@ -256,10 +256,10 @@ def main():
     out_hexagons = os.path.join(config["data"]["results_dir"], f"method2_mcf_{suffix}_hexagons.csv")
     hex_df.to_csv(out_hexagons, index=False)
 
-    print(f"\nRezultati spremljeni:")
+    print(f"\nResults spremljeni:")
     print(f"  {out_assignments}")
     print(f"  {out_hexagons}")
-    print("\nGOTOVO.")
+    print("\nDONE.")
 
 
 if __name__ == "__main__":

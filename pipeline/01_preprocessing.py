@@ -1,11 +1,11 @@
 """
 01_preprocessing.py
 
-Ucitava finalni Zagreb-zapad listopad uzorak, projicira geografske koordinate
+Ucitava finalni Zagreb-zapad October uzorak, projicira geografske koordinate
 u lokalni metricki sustav (x, y u metrima), i sprema obogaceni dataset
 spreman za sve tri optimizacijske metode.
 
-Pokreni: python3 01_preprocessing.py
+Run: python3 01_preprocessing.py
 """
 import sys
 import os
@@ -42,9 +42,9 @@ def main():
     print("=" * 60)
     print("PREPROCESSING ZAVRSEN")
     print("=" * 60)
-    print(f"Ukupno redova: {len(df):,}")
-    print(f"Broj kurira: {df['UserID'].nunique()}")
-    print(f"Broj dana: {df['date'].nunique()}")
+    print(f"Total redova: {len(df):,}")
+    print(f"Number couriers: {df['UserID'].nunique()}")
+    print(f"Number days: {df['date'].nunique()}")
     print(f"\nRaspon x (m): {df['x_m'].min():.0f} do {df['x_m'].max():.0f}")
     print(f"Raspon y (m): {df['y_m'].min():.0f} do {df['y_m'].max():.0f}")
     print(f"\nOutput: {OUTPUT_FILE}")

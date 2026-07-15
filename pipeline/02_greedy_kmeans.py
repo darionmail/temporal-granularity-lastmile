@@ -1,22 +1,22 @@
 """
 02_greedy_kmeans_hex.py (v2 - PO DANU)
 
-Metoda 1: Capacitated k-Means with Hexagonal Optimization (Sekcija 5.1 rada)
+Method 1: Capacitated k-Means with Hexagonal Optimization (Sekcija 5.1 rada)
 RESTRUKTURIRANO: svih 5 stadija se izvode PO DANU (konzistentno s originalnim
 radom koji je radio 5 dnevnih snapshotova), umjesto agregacije kroz cijeli mjesec.
 
 Za svaki dan:
-  Stage 1: Banded Assignment (Greedy CKM) na tockama TOG dana
+  Stage 1: Banded Assignment (Greedy CKM) na tockama TOG days
   Stage 2: (preskoceno - nema stabilizacije kroz dane jer je svaki dan zaseban)
-  Stage 3: Snap-Cover-Cap Hexagon Construction (na temelju centroida TOG dana)
-  Stage 4: Polygon-Aware Post-Reallocation (unutar TOG dana)
-  Stage 5: Overlap and Density Refinement (unutar TOG dana)
+  Stage 3: Snap-Cover-Cap Hexagon Construction (na temelju centroida TOG days)
+  Stage 4: Polygon-Aware Post-Reallocation (unutar TOG days)
+  Stage 5: Overlap and Density Refinement (unutar TOG days)
 
-Finalni rezultat: 20 kurira x 27 dana = do 540 dnevnih heksagona.
+Finalni rezultat: 20 couriers x 27 days = do 540 dnevnih heksagona.
 Assignments CSV ima sve pakete s kolonom 'assigned_courier' (po danu).
 Hexagons CSV ima jedan red po (kurir, dan) kombinaciji.
 
-Pokreni: python3 02_greedy_kmeans_hex.py
+Run: python3 02_greedy_kmeans_hex.py
 """
 import sys
 import os
@@ -265,7 +265,7 @@ def main():
         max_total_allowed = k * n_max
         day_feasible = min_total_needed <= n_points <= max_total_allowed
         if not day_feasible:
-            reason = "premalo paketa" if n_points < min_total_needed else "previse paketa"
+            reason = "premalo parcels" if n_points < min_total_needed else "previse parcels"
             infeasibility_log.append({
                 "date": date, "n_points": n_points, "n_active_couriers": k,
                 "min_needed": min_total_needed, "max_allowed": max_total_allowed, "reason": reason,
@@ -307,10 +307,10 @@ def main():
     infeasibility_df = pd.DataFrame(infeasibility_log)
     if len(infeasibility_df) > 0:
         n_days_infeasible = infeasibility_df.loc[
-            infeasibility_df["reason"].isin(["premalo paketa", "previse paketa"]), "date"
+            infeasibility_df["reason"].isin(["premalo parcels", "previse parcels"]), "date"
         ].nunique()
         n_courier_violations = (infeasibility_df["reason"] == "kurir_izvan_raspona").sum()
-        print(f"\nUPOZORENJE: {n_days_infeasible} dana je teorijski infeasible za [{n_min},{n_max}] kapacitet.")
+        print(f"\nUPOZORENJE: {n_days_infeasible} days je teorijski infeasible za [{n_min},{n_max}] kapacitet.")
         print(f"UPOZORENJE: {n_courier_violations} (kurir, dan) parova zavrsilo izvan [{n_min},{n_max}] raspona.")
     else:
         print(f"\nSvi dani/kuriri su unutar [{n_min},{n_max}] kapaciteta.")
@@ -326,13 +326,13 @@ def main():
     out_infeasibility = os.path.join(config["data"]["results_dir"], "method1_infeasibility_log.csv")
     infeasibility_df.to_csv(out_infeasibility, index=False)
 
-    print(f"\nDodijeljeno {(df['assigned_courier'].notna()).sum():,} od {len(df):,} paketa.")
-    print(f"Ukupno heksagona (kurir x dan): {len(hex_df):,}")
-    print(f"\nRezultati spremljeni:")
+    print(f"\nDodijeljeno {(df['assigned_courier'].notna()).sum():,} od {len(df):,} parcels.")
+    print(f"Total heksagona (kurir x dan): {len(hex_df):,}")
+    print(f"\nResults spremljeni:")
     print(f"  {out_assignments}")
     print(f"  {out_hexagons}")
     print(f"  {out_infeasibility}")
-    print("\nGOTOVO.")
+    print("\nDONE.")
 
 
 if __name__ == "__main__":

@@ -1,10 +1,10 @@
 """
 vizualiziraj_rute_cestovne.py
 
-Vizualizacija rezultata usporedbe stvarnih i optimalnih ruta
+Visualization rezultata usporedbe stvarnih i optimalnih ruta
 koristeći stvarne cestovne udaljenosti (OSMnx).
 
-Pokreni: python3 skripte/vizualiziraj_rute_cestovne.py
+Run: python3 skripte/vizualiziraj_rute_cestovne.py
 """
 import numpy as np
 import pandas as pd
@@ -51,7 +51,7 @@ ax.text(0.5, -0.13, note, transform=ax.transAxes,
 plt.tight_layout()
 plt.savefig(OUT1, dpi=150, bbox_inches="tight")
 plt.close()
-print(f"Spremljeno: {OUT1}")
+print(f"Saved: {OUT1}")
 
 # ── Figure 2: Box plot po kuriru ──
 fig, ax = plt.subplots(figsize=(14, 6))
@@ -76,7 +76,7 @@ ax.grid(True, alpha=0.3, axis="y")
 plt.tight_layout()
 plt.savefig(OUT2, dpi=150, bbox_inches="tight")
 plt.close()
-print(f"Spremljeno: {OUT2}")
+print(f"Saved: {OUT2}")
 
 # ── Figure 3: Scatter actual vs optimal ──
 fig, ax = plt.subplots(figsize=(8, 8))
@@ -104,9 +104,9 @@ ax.text(0.05, 0.93,
 plt.tight_layout()
 plt.savefig(OUT3, dpi=150, bbox_inches="tight")
 plt.close()
-print(f"Spremljeno: {OUT3}")
+print(f"Saved: {OUT3}")
 
-# ── Figure 4: Usporedba Haversine vs Cestovne udaljenosti ──
+# ── Figure 4: Comparison Haversine vs Cestovne udaljenosti ──
 # Ucitaj i Haversine rezultate za usporedbu
 try:
     df_h = pd.read_csv("results_dir/route_comparison_haversine.csv")
@@ -152,9 +152,9 @@ try:
     plt.tight_layout()
     plt.savefig(OUT4, dpi=150, bbox_inches="tight")
     plt.close()
-    print(f"Spremljeno: {OUT4}")
-    print(f"\nStvarni road factor (medijan): {road_factor:.2f}x")
+    print(f"Saved: {OUT4}")
+    print(f"\nStvarni road factor (median): {road_factor:.2f}x")
 except FileNotFoundError:
-    print("Haversine rezultati nisu pronađeni, preskačem Figure 4")
+    print("Haversine results nisu pronađeni, preskačem Figure 4")
 
-print("\nGOTOVO.")
+print("\nDONE.")

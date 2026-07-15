@@ -1,14 +1,14 @@
 """
-Analiza stabilnosti teritorija dan-na-dan (Territory Stability Analysis)
+Analysis stabilnosti teritorija dan-na-dan (Territory Stability Analysis)
 
-Za svaki kurir i svaki par uzastopnih dana racuna:
+Za svaki kurir i svaki par uzastopnih days racuna:
 1. Centroid displacement (m) - koliko se centar heksagona pomakne
-2. Overlap između uzastopnih dana (%) - koliki dio teritorija ostaje isti
+2. Overlap između uzastopnih days (%) - koliki dio teritorija ostaje isti
 3. Promjena velicine (stranica heksagona)
 
 Takodjer racuna agregiranu "prostornu volatilnost" po kuriru kroz cijeli mjesec.
 
-Pokreni: python3 stability_analysis.py
+Run: python3 stability_analysis.py
 """
 import os
 import numpy as np
@@ -88,8 +88,8 @@ df.to_csv(OUT_PATH, index=False)
 print("=" * 60)
 print("TERRITORY DAY-TO-DAY STABILITY ANALYSIS")
 print("=" * 60)
-print(f"\nBroj parova uzastopnih dana: {len(df):,}")
-print(f"Broj kurira: {len(couriers)}")
+print(f"\nNumber parova uzastopnih days: {len(df):,}")
+print(f"Number couriers: {len(couriers)}")
 
 print("\n--- Centroid Displacement (m) ---")
 print(df["centroid_displacement_m"].describe().round(1))
@@ -125,6 +125,6 @@ summary = df.groupby("UserID").agg(
 print(summary.sort_values("mean_displacement_m", ascending=False).to_string())
 summary.to_csv(OUT_SUMMARY, index=True)
 
-print(f"\nSpremljeno: {OUT_PATH}")
-print(f"Spremljeno: {OUT_SUMMARY}")
-print("\nGOTOVO.")
+print(f"\nSaved: {OUT_PATH}")
+print(f"Saved: {OUT_SUMMARY}")
+print("\nDONE.")

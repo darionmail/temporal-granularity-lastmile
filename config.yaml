@@ -1,49 +1,49 @@
-# Konfiguracija parametara za teritorijalnu optimizaciju
-# Zagreb West distribution area, listopad 2025, 20 kurira
+# Configuration for the territory design pipeline
+# Zagreb West distribution area, October 2025, 20 couriers
 
 data:
   input_file: "data/input.csv"  # Update this path to your preprocessed data file
   results_dir: "results"
 
-# Kapacitetski raspon - izvorni iz rada (Sekcija 2.2, Daily Capacity Constraints)
-# Zadrzano [60,80] kao normativni operativni cilj, ne kalibrirano na stvarni volumen uzorka.
-# Stvarni medijan ovog uzorka je ~61/dan po kuriru, ali pojedini dani imaju ekstreman ukupni
-# volumen (218 do 1423 paketa/dan na 20 kurira) gdje [60,80] nije uvijek fizicki dostizno -
-# to se bilezi kao infeasibility dijagnostika u evaluaciji, ne rjesava promjenom kapaciteta.
+# Capacity range - as used in the paper (Section 3.1)
+# Fixed [60,80] as normative operational target, not calibrated to actual sample volume.
+# Actual median is ~61/day per courier, but some days have extreme total
+# volume (218 to 1423 parcels/day for 20 couriers) where [60,80] is not always feasible -
+# documented as infeasibility diagnostics in results, not resolved by changing the target.
 capacity:
   n_min: 60
   n_max: 80
 
-# Heksagonalna geometrija (Sekcija 3 rada)
+# Hexagonal geometry (Section 3.2)
 hexagon:
-  base_lattice_km: 1.0       # bazna lattice za snap-cover-cap (Stage 3)
-  refine_lattice_km: 0.5     # fina lattice za lokalnu optimizaciju (Stage 5)
-  s_base_m: 1000.0           # bazna stranica za floor
-  s_max_m: 2000.0            # stroga gornja granica stranice
+  base_lattice_km: 1.0       # base lattice for snap-cover-cap (Stage 3)
+  refine_lattice_km: 0.5     # fine lattice for local optimization (Stage 5)
+  s_base_m: 1000.0           # base side length for floor calculation
+  s_max_m: 2000.0            # strict upper bound on hexagon side length
   s_floor_frac: 0.75         # floor = 0.75 * s_base
 
-# Stage 5 - Overlap and Density Refinement scoring funkcija
+# Stage 5 - Overlap and Density Refinement scoring function
 # Score_u = sum_v!=u Area(Hu n Hv) + alpha * outside_u + lambda_dens*(Au/Nu) + lambda_eq*(Au/Nu - delta)^2
 refinement:
-  alpha: 1000000.0            # velika penalizacija za parcele izvan vlastitog heksagona
-  lambda_dens: 1.0           # tezina minimizacije density (A/N)
-  lambda_eq: 0.001           # tezina cross-courier equalization
-  max_iterations: 10         # broj iteracija greedy descent po danu/agregatu
+  alpha: 1000000.0            # large penalty for parcels outside their assigned hexagon
+  lambda_dens: 1.0           # weight for density minimization term (A/N)
+  lambda_eq: 0.001           # weight for cross-courier equity term
+  max_iterations: 10         # number of greedy descent iterations per day
 
-# Min-Cost Flow (Metoda 2)
+# Min-Cost Flow (Method 2)
 mcf:
-  distance_penalty_km: 4.0    # prag iznad kojeg se primjenjuje kvadratna penalizacija (tuned varijanta)
-  penalty_weight: 50.0        # koeficijent kvadratne penalizacije
+  distance_penalty_km: 4.0    # distance threshold for quadratic penalty (tuned variant)
+  penalty_weight: 50.0        # quadratic penalty coefficient
 
-# Weighted Voronoi / Power Diagram (Metoda 3)
+# Weighted Voronoi / Power Diagram (Method 3)
 weighted_voronoi:
   learning_rate_baseline: 1.0
-  learning_rate_tuned: 0.1     # tuned varijanta: 0.1x baseline
-  l2_regularization: 0.01      # tuned varijanta: regularizacija tezina
+  learning_rate_tuned: 0.1     # tuned variant: 0.1x baseline learning rate
+  l2_regularization: 0.01      # tuned variant: weight regularization
   max_iterations: 50
-  convergence_tol: 0.5         # konvergencija ako se kapacitetna devijacija ne mijenja vise od ovoga
+  convergence_tol: 0.5         # convergence if capacity deviation changes less than this
 
-# Studijska regija
+# Study region
 region:
   center_lat: 45.8150
   center_lon: 15.9819

@@ -1,12 +1,12 @@
 """
-Priprema prosinackog uzorka za usporedbu s listopadskim.
+Priprema Decemberkog uzorka za usporedbu s Octoberskim.
 
-Isti kriteriji kao za listopad:
+Isti kriteriji kao za October:
 - Distributivno podrucje: Zagreb West distribution area
 - Kuriri s >5000 dostava godisnje (u istom podrucju)
-- Mjesec: prosinac 2025
+- Mjesec: December 2025
 
-Pokreni: python3 pripremi_prosinac.py
+Run: python3 pripremi_December.py
 """
 import pandas as pd
 import numpy as np
@@ -34,14 +34,14 @@ zagreb_df["month"] = zagreb_df["EventDatetime"].dt.to_period("M")
 
 # Filter na facility
 facility_df = zagreb_df[zagreb_df["FacilityName"] == FACILITY_NAME].copy()
-print(f"\nUkupno redova u {FACILITY_NAME}: {len(facility_df):,}")
+print(f"\nTotal redova u {FACILITY_NAME}: {len(facility_df):,}")
 
 # Kvalificirani kuriri (>5000 godisnje)
 per_courier_total = facility_df.groupby("UserID").size()
 qualifying_ids = set(per_courier_total[per_courier_total > MIN_ANNUAL_DELIVERIES].index)
-print(f"Kvalificiranih kurira (>5000/god): {len(qualifying_ids)}")
+print(f"Kvalificiranih couriers (>5000/god): {len(qualifying_ids)}")
 
-# Filter na prosinac i kvalificirane kurire
+# Filter na December i kvalificirane kurire
 final_df = facility_df[
     (facility_df["UserID"].isin(qualifying_ids)) &
     (facility_df["month"].astype(str) == TARGET_MONTH)
@@ -78,22 +78,22 @@ final_df["date"] = pd.to_datetime(final_df["EventDatetime"]).dt.date
 final_df.to_csv(OUTPUT_FILE, index=False, encoding="utf-8")
 
 print(f"\nProsinacki uzorak:")
-print(f"  Ukupno redova: {len(final_df):,}")
-print(f"  Broj kurira: {final_df['UserID'].nunique()}")
-print(f"  Broj dana: {final_df['date'].nunique()}")
+print(f"  Total redova: {len(final_df):,}")
+print(f"  Number couriers: {final_df['UserID'].nunique()}")
+print(f"  Number days: {final_df['date'].nunique()}")
 print(f"  Datumski raspon: {final_df['date'].min()} do {final_df['date'].max()}")
 
-# Dnevni volumen
+# Dnevni volume
 daily = final_df.groupby("date").size()
-print(f"\nDnevni volumen (prosinac):")
+print(f"\nDnevni volume (December):")
 print(f"  Min: {daily.min()}, Max: {daily.max()}, Median: {daily.median():.0f}, Mean: {daily.mean():.1f}")
 
 # Feasibility check [60,80]
 k = final_df["UserID"].nunique()
 infeasible = ((daily < k*60) | (daily > k*80)).sum()
-print(f"\nFeasibility [60,80] s k={k} kurira:")
-print(f"  Infeasible dana: {infeasible} od {daily.nunique()} ({100*infeasible/daily.nunique():.1f}%)")
-print(f"  Feasibility window: [{k*60}, {k*80}] paketa/dan")
+print(f"\nFeasibility [60,80] s k={k} couriers:")
+print(f"  Infeasible days: {infeasible} od {daily.nunique()} ({100*infeasible/daily.nunique():.1f}%)")
+print(f"  Feasibility window: [{k*60}, {k*80}] parcels/dan")
 
-print(f"\nSpremljeno: {OUTPUT_FILE}")
-print("\nGOTOVO.")
+print(f"\nSaved: {OUTPUT_FILE}")
+print("\nDONE.")

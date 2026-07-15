@@ -1,7 +1,7 @@
 """
 Sensitivity Analysis za:
-1. Stage 5 parametri: alpha (10^4 do 10^7) i lambda_dens (0.1, 1.0, 10.0)
-   - Pokrecemo Stage 5 s razlicitim parametrima na postojecim assignments
+1. Stage 5 parameters: alpha (10^4 do 10^7) i lambda_dens (0.1, 1.0, 10.0)
+   - Pokrecemo Stage 5 s razlicitim parametersma na postojecim assignments
    - Usporedujemo finalni ranking metoda
 
 2. Composite score tezine:
@@ -10,9 +10,9 @@ Sensitivity Analysis za:
    - Overlap prioritet (0.50, 0.25, 0.25)
    - Density prioritet (0.25, 0.25, 0.50)
 
-Cilj: pokazati da ranking ostaje stabilan pod razumnim varijacijama parametara.
+Cilj: pokazati da ranking ostaje stable pod razumnim varijacijama parametara.
 
-Pokreni: python3 sensitivity_analysis_params.py
+Run: python3 sensitivity_analysis_params.py
 """
 import os
 import sys
@@ -102,7 +102,7 @@ print("Running Stage 5 with different alpha/lambda on Method 1 (Greedy k-means)\
 
 def run_stage5_evaluate(df_assign, hex_df, alpha, lambda_dens,
                         lambda_eq=0.001, max_iter=5):
-    """Pokrecemo Stage 5 s danim parametrima, vracamo aggregate metrike."""
+    """Pokrecemo Stage 5 s danim parametersma, vracamo aggregate metrike."""
     from postprocessing import stage5_refinement, stage4_reallocation
 
     hex_config = {
@@ -197,8 +197,8 @@ for lam in lambda_values:
     print(f"{'1e6':>12} {lam:>12.1f} {ov:>10.2f} {out:>10.2f}")
     alpha_results.append({"alpha": 1e6, "lambda_dens": lam, "overlap_pct": ov, "outside_pct": out})
 
-# Spremi rezultate
+# Save rezultate
 results_df = pd.DataFrame(alpha_results)
 results_df.to_csv(os.path.join(RESULTS_DIR, "sensitivity_analysis.csv"), index=False)
-print(f"\nSpremljeno: {os.path.join(RESULTS_DIR, 'sensitivity_analysis.csv')}")
-print("\nGOTOVO.")
+print(f"\nSaved: {os.path.join(RESULTS_DIR, 'sensitivity_analysis.csv')}")
+print("\nDONE.")

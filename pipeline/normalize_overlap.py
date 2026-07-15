@@ -1,10 +1,10 @@
 """
-Normalizirani overlap - preklapanje kao postotak ukupne teritorijalne površine.
+Normalized overlap - preklapanje kao postotak ukupne teritorijalne površine.
 
 Za svaki dan i svaku metodu racuna:
-  overlap_pct = (ukupni overlap između parova) / (ukupna površina svih heksagona tog dana) * 100
+  overlap_pct = (ukupni overlap između parova) / (ukupna površina svih heksagona tog days) * 100
 
-Pokreni: python3 normaliziraj_overlap.py
+Run: python3 normaliziraj_overlap.py
 """
 import os
 import numpy as np
@@ -71,5 +71,5 @@ for method, fname in METHODS.items():
 
 out = pd.DataFrame(summary)
 out.to_csv(os.path.join(RESULTS_DIR, "normalized_overlap.csv"), index=False)
-print(f"\nSpremljeno: {os.path.join(RESULTS_DIR, 'normalized_overlap.csv')}")
-print("\nGOTOVO.")
+print(f"\nSaved: {os.path.join(RESULTS_DIR, 'normalized_overlap.csv')}")
+print("\nDONE.")

@@ -7,7 +7,7 @@ Za svaki (kurir, dan) uspoređuje:
 
 Koristeći OSMnx cestovni graf za Zagreb.
 
-Pokreni: python3 skripte/usporedi_rute.py
+Run: python3 skripte/usporedi_rute.py
 """
 import os
 import sys
@@ -29,7 +29,7 @@ OUTPUT_FILE = "results_dir/route_comparison.csv"
 GRAPH_CACHE = os.path.join(os.path.dirname(config["data"]["results_dir"]), "road_network_graph.graphml")
 
 # ── 1. Ucitaj podatke ──
-print("Ucitavam podatke...")
+print("Loading data...")
 df = pd.read_csv(INPUT_FILE, encoding="utf-8")
 df["EventDatetime"] = pd.to_datetime(df["EventDatetime"])
 df["date"] = df["EventDatetime"].dt.date
@@ -39,7 +39,7 @@ print(f"  Paketa: {len(df):,}, Kurira: {df['UserID'].nunique()}, Dana: {df['date
 
 # ── 2. OSMnx graf (cache lokalno) ──
 if os.path.exists(GRAPH_CACHE):
-    print("Ucitavam cached cestovni graf...")
+    print("Loading cached cestovni graf...")
     G = ox.load_graphml(GRAPH_CACHE)
 else:
     print("Preuzimam cestovni graf za Zagreb zapad (prvi put, par minuta)...")
@@ -126,7 +126,7 @@ def nearest_neighbor_tsp(lats, lons):
 
 
 # ── 5. Glavna petlja ──
-print("\nRacunam rute po (kurir, dan)...")
+print("\nComputing rute po (kurir, dan)...")
 results = []
 
 groups = list(df.groupby(["UserID", "date"]))
@@ -166,14 +166,14 @@ for idx, ((uid, date), day_df) in enumerate(groups):
         "saving_pct": round(saving_pct, 1),
     })
 
-# ── 6. Rezultati ──
+# ── 6. Results ──
 results_df = pd.DataFrame(results)
 results_df.to_csv(OUTPUT_FILE, index=False)
 
 print("\n" + "=" * 60)
 print("REZULTATI USPOREDBE RUTA")
 print("=" * 60)
-print(f"\nBroj (kurir, dan) parova: {len(results_df)}")
+print(f"\nNumber (kurir, dan) parova: {len(results_df)}")
 print(f"\n--- Stvarna ruta (km/dan) ---")
 print(results_df["actual_km"].describe().round(2))
 print(f"\n--- Optimalna ruta (km/dan) ---")
@@ -185,5 +185,5 @@ print(results_df["saving_pct"].describe().round(1))
 print(f"\nUkupna ušteda kroz sve (kurir,dan) parove: {results_df['saving_km'].sum():.1f} km")
 print(f"Prosjecna ušteda po danu po kuriru: {results_df['saving_km'].mean():.1f} km ({results_df['saving_pct'].mean():.1f}%)")
 
-print(f"\nSpremljeno: {OUTPUT_FILE}")
-print("\nGOTOVO.")
+print(f"\nSaved: {OUTPUT_FILE}")
+print("\nDONE.")

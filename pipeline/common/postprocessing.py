@@ -1,7 +1,7 @@
 """
 postprocessing.py — Zajednički Stage 4 i Stage 5 post-processing modul.
 
-Može se primijeniti na output BILO KOJE metode dodjele paketa
+Može se primijeniti na output BILO KOJE metode dodjele parcels
 (k-means, MCF, Voronoi) jer ovisi samo o assignments i hexagonima,
 ne o tome kako je dodjela napravljena.
 
@@ -119,7 +119,7 @@ def apply_postprocessing(df, hex_df, hex_config, refine_config):
     """
     Primjeni Stage 4 i Stage 5 na output bilo koje metode.
 
-    Parametri:
+    Parameters:
       df      — assignments DataFrame s kolonama: date, x_m, y_m, assigned_courier
       hex_df  — hexagons DataFrame s kolonama: date, UserID, center_x, center_y,
                 side_length_m, area_m2, polygon_wkt
@@ -153,10 +153,10 @@ def apply_postprocessing(df, hex_df, hex_config, refine_config):
         # Stage 5
         hexagons = stage5_refinement(points_xy, assignment, hexagons, hex_config, refine_config)
 
-        # Spremi ažurirane assignments
+        # Save ažurirane assignments
         df.loc[day_mask, "assigned_courier"] = assignment
 
-        # Spremi ažurirane hexagone
+        # Save ažurirane hexagone
         for cid, h in hexagons.items():
             all_hex_rows.append({
                 "date": date,
