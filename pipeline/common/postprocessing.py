@@ -1,13 +1,13 @@
 """
-postprocessing.py — Zajednički Stage 4 i Stage 5 post-processing modul.
+postprocessing.py — Shared Stage 4 and Stage 5 post-processing module.
 
-Može se primijeniti na output BILO KOJE metode dodjele parcels
+Can be applied to the output of ANY assignment method
 (k-means, MCF, Voronoi) jer ovisi samo o assignments i hexagonima,
 ne o tome kako je dodjela napravljena.
 
 Stage 4: Polygon-Aware Post-Reallocation
-  - Pakete koji su izvan svog heksagona premjestiti u heksagon koji ih sadrži
-  - Ako ih sadrži više, odabrati najbliži centar
+  - Relocate parcels outside their hexagon to the containing hexagon
+  - If multiple hexagons contain the parcel, select the nearest center
 
 Stage 5: Overlap and Density Refinement
   - Za svaki heksagon, pretraziti 6 susjednih lattice pozicija
@@ -28,8 +28,8 @@ from hex_utils import snap_cover_cap, get_neighbor_centers, hex_area
 
 def stage4_reallocation(day_points_xy, assignment, hexagons, active_couriers):
     """
-    Premjesti pakete koji su izvan svog heksagona u heksagon koji ih sadrži.
-    Vraća ažurirani assignment array.
+    Relocate parcels outside their hexagon to the containing hexagon.
+    Returns updated assignment array.
     """
     new_assignment = assignment.copy()
     for i in range(len(day_points_xy)):
@@ -125,8 +125,8 @@ def apply_postprocessing(df, hex_df, hex_config, refine_config):
                 side_length_m, area_m2, polygon_wkt
 
     Vraca:
-      df      — ažurirani assignments
-      hex_df  — ažurirani hexagoni
+      df      — updated assignments
+      hex_df  — updated hexagons
     """
     df = df.copy()
     all_hex_rows = []
@@ -153,10 +153,10 @@ def apply_postprocessing(df, hex_df, hex_config, refine_config):
         # Stage 5
         hexagons = stage5_refinement(points_xy, assignment, hexagons, hex_config, refine_config)
 
-        # Save ažurirane assignments
+        # Save updated assignments
         df.loc[day_mask, "assigned_courier"] = assignment
 
-        # Save ažurirane hexagone
+        # Save updated hexagons
         for cid, h in hexagons.items():
             all_hex_rows.append({
                 "date": date,

@@ -1,12 +1,12 @@
 """
 usporedi_rute_haversine.py
 
-Za svaki (kurir, dan) uspoređuje:
+For each (courier, day) pair compares:
 1. Stvarnu rutu (redoslijed iz EventDatetime timestampova)
 2. Optimalnu rutu (TSP nearest-neighbor heuristika)
 
 Koristi Haversine (crow-flies) udaljenosti — ne treba internet ni OSMnx graf.
-Omjer stvarna/optimalna ostaje metodološki valjan za usporedbu efikasnosti.
+The actual/optimal ratio remains methodologically valid for efficiency comparison.
 
 Run: python3 skripte/usporedi_rute_haversine.py
 """
@@ -23,7 +23,7 @@ INPUT_FILE = config["data"]["input_file"]
 OUTPUT_FILE = "results_dir/route_comparison_haversine.csv"
 
 def haversine_km(lat1, lon1, lat2, lon2):
-    """Udaljenost između dvije GPS točke u km (crow-flies)."""
+    """Distance between two GPS points in km (crow-flies)."""
     R = 6371.0
     dlat = np.radians(lat2 - lat1)
     dlon = np.radians(lon2 - lon1)
@@ -31,14 +31,14 @@ def haversine_km(lat1, lon1, lat2, lon2):
     return 2 * R * np.arcsin(np.sqrt(a))
 
 def route_length_km(lats, lons):
-    """Ukupna duljina rute za zadani redoslijed točaka."""
+    """Total route length for a given sequence of points."""
     total = 0.0
     for i in range(len(lats) - 1):
         total += haversine_km(lats[i], lons[i], lats[i+1], lons[i+1])
     return total
 
 def nearest_neighbor_tsp(lats, lons):
-    """Nearest-neighbor TSP heuristika. Vraća optimirani redoslijed indeksa."""
+    """Nearest-neighbor TSP heuristic. Returns optimized index order."""
     n = len(lats)
     if n <= 2:
         return list(range(n))
@@ -112,15 +112,15 @@ print(results_df["actual_km"].describe().round(2))
 print("\n--- Optimalna ruta / NN-TSP (km/dan) ---")
 print(results_df["optimal_km"].describe().round(2))
 
-print("\n--- Ušteda (km/dan) ---")
+print("\n--- Saving (km/day) ---")
 print(results_df["saving_km"].describe().round(2))
 
-print("\n--- Ušteda (%) ---")
+print("\n--- Saving (%) ---")
 print(results_df["saving_pct"].describe().round(1))
 
-print(f"\nProsjecna ušteda: {results_df['saving_km'].mean():.1f} km/dan "
+print(f"\nAverage saving: {results_df['saving_km'].mean():.1f} km/day "
       f"({results_df['saving_pct'].mean():.1f}%)")
-print(f"Ukupna ušteda kroz sve parove: {results_df['saving_km'].sum():.0f} km")
+print(f"Total saving across all pairs: {results_df['saving_km'].sum():.0f} km")
 
 print(f"\nNapomena: udaljenosti su crow-flies (Haversine), ne cestovne.")
 print(f"  Cestovne su tipično 1.2-1.4x vece (urban road factor).")
