@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+
+.venv/
+venv/
+.env
+
+facility_map_private.csv
+depots_private.csv
+
+data/
+raw_data/
+
+*.osm.pbf
