@@ -1,6 +1,6 @@
 # Temporal granularity of parcel delivery territory plans — analysis code
 
-Code for Novaković & Mršić, "How often should parcel delivery territories be redesigned? Workload balance, territory continuity and travel under fixed, rebalanced and daily plans" (submitted to the *International Journal of Logistics Research and Applications*).
+Code for Novaković & Mršić, "How often should parcel delivery territories be redesigned? Workload balance, territory continuity and travel under fixed, rebalanced and daily plans" (prepared for submission to the *International Journal of Logistics Research and Applications*).
 
 The delivery data belong to a parcel operator and are not included. The expected input is a CSV with the columns
 `ShipmentItemBarcode, EventDatetime, FacilityCode, UserID, EventGeoX (lon), EventGeoY (lat)`, one row per delivered parcel.
